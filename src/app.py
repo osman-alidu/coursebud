@@ -30,5 +30,70 @@ def hello_world():
     return "Hello world!"
 
 
+@app.route("/api/courses/")
+def get_courses():
+    pass
+
+
+@app.route("/api/courses/", methods=["POST"])
+def create_course():
+    pass
+
+
+@app.route("/api/courses/<int:course_id>/")
+def get_course(course_id):
+    pass
+
+
+@app.route("/api/courses/<int:course_id>/")
+def update_course():
+    pass
+
+
+@app.route("/api/courses/<int:course_id>/", methods=["DELETE"])
+def del_course():
+    pass
+
+
+@app.route("/api/courses/<int:course_id>/comments")
+def get_course_comments():
+    pass
+
+
+@app.route("/api/users/", methods=["POST"])
+def create_user():
+    pass
+
+
+@app.route("/api/users/<int:user_id>/")
+def update_user():
+    pass
+
+
+@app.route("/api/users/<int:user_id>/comments")
+def get_user_comments():
+    pass
+
+
+@app.route("/api/users/<int:user_id>/")
+def del_user():
+    pass
+
+
+@app.route("/api/users/<int:user_id>/comments", methods=["POST"])
+def add_comment():
+    pass
+
+
+@app.route("/api/comments/", methods=["POST"])
+def del_comment():
+    pass
+
+
+@app.route("/api/courses/<int:course_id>/rating", methods=["POST"])
+def add_rating():
+    pass
+
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
