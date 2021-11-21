@@ -1,4 +1,4 @@
-# coursebud
+# Coursebud
 To run module, run the ff cmds in command line:
 1. For mac/Linux:
   - cd src 
