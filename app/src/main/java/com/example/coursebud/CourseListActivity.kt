@@ -19,11 +19,11 @@ class CourseListActivity : AppCompatActivity() {
 
         recyclerView.setHasFixedSize(true)
         // use a linear layout manager
-        layoutManager = LinearLayoutManager(this@CourseListActivity)
+        layoutManager = LinearLayoutManager(this@CourseListActivity, LinearLayoutManager.VERTICAL, false)
         recyclerView.layoutManager = layoutManager
         // create dataset, format should match what you specified 
         // in the CourseAdapter object
-        var courses = mutableListOf<String>()
+        var courses = mutableListOf<Course>()
 
         mAdapter = CourseAdapter(courses)
         recyclerView.adapter = mAdapter
