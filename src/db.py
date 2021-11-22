@@ -9,8 +9,7 @@ class Course(db.Model):
     code = db.Column(db.String, nullable=False)
     name = db.Column(db.String, nullable=False)
     description = db.Column(db.String, nullable=False)
-    # should we create a professor table?
-    profesors = db.Column(db.String, nullable=False)
+    professors = db.Column(db.String, nullable=False)
     rating = db.Column(db.Integer, nullable=False)
     comments = db.relationship("Comment", cascade="delete")
 
@@ -18,6 +17,7 @@ class Course(db.Model):
         self.code = kwargs.get("code")
         self.name = kwargs.get("name")
         self.description = kwargs.get("description")
+        self.professors = kwargs.get("professors")
         self.rating = kwargs.get("rating")
 
     def serialize(self):
