@@ -13,3 +13,5 @@ To run module, run the ff cmds in command line:
   - .\venv\Scripts\Activate.ps1
   - pip3 install -r requirements.txt
   - python3 app.py
+
+GitHub repo: https://github.com/osman-alidu/coursebud
