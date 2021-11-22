@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Coursebud">
         <activity
+            android:name=".CourseListActivity"
+            android:exported="true" />
+        <activity
             android:name=".CourseList"
             android:exported="true" />
         <activity
