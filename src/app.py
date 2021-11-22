@@ -32,12 +32,26 @@ def hello_world():
 
 @app.route("/api/courses/")
 def get_courses():
-    pass
+    courses = [t.serialize() for t in Course.query.all()]
+    return json.dumps({"courses": courses}), 200
 
 
 @app.route("/api/courses/", methods=["POST"])
 def create_course():
-    pass
+    body = json.loads(request.data)
+    if body.get('code') == None or body.get('name') == None:
+        return failure_response("Invalid data", 400)
+    new_course = Course(
+        code=body.get('code'),
+        name=body.get('name'),
+        description=body.get('description'),
+        professors=body.get('professors'),
+        rating=0,
+        comments=[]
+    )
+    db.session.add(new_course)
+    db.session.commit()
+    return json.dumps(new_course.serialize()), 201
 
 
 @app.route("/api/courses/<int:course_id>/")
