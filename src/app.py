@@ -23,7 +23,18 @@ def failure_response(message, code=404):
     return json.dumps({"success": False, "error": message}), code
 
 
+def str_lst_sum(lst):
+    sum = 0
+    for x in lst:
+        sum += int(x)
+    return sum
+
+
+def avg(lst):
+    return str_lst_sum(lst)/len(lst)
+
 # your routes here
+
 
 @ app.route("/")
 def hello_world():
@@ -47,6 +58,7 @@ def create_course():
         description=body.get('description'),
         professors=body.get('professors'),
         rating=0,
+        ratings="0",
         comments=[]
     )
     db.session.add(new_course)
@@ -56,21 +68,43 @@ def create_course():
 
 @app.route("/api/courses/<int:course_id>/")
 def get_course(course_id):
-    pass
+    course = Course.query.filter_by(id=course_id).first()
+    if course is None:
+        return failure_response("Course not found!", 404)
+    return json.dumps(course.serialize()), 200
 
 
-@app.route("/api/courses/<int:course_id>/")
-def update_course():
-    pass
+@app.route("/api/courses/<int:course_id>/", methods=["POST"])
+def update_course(course_id):
+    course = Course.query.filter_by(id=course_id).first()
+    if course is None:
+        return failure_response("course not found!")
+    body = json.loads(request.data)
+    n_rating = body.get('rating')
+    rating_lst = list(course.ratings + str(n_rating))
+    course.code = body.get('code', course.code),
+    course.name = body.get('name', course.name),
+    course.description = body.get('description', course.description),
+    course.professors = body.get('professors', course.professors),
+    course.rating = avg(rating_lst),
+    course.ratings = course.ratings + str(n_rating),
+    course.comments = course.comments,
+    db.session.commit()
+    return success_response(course.serialize(), 201)
 
 
 @app.route("/api/courses/<int:course_id>/", methods=["DELETE"])
-def del_course():
-    pass
+def del_course(course_id):
+    course = Course.query.filter_by(id=course_id).first()
+    if course is None:
+        return failure_response("course not found!", 404)
+    db.session.delete(course)
+    db.session.commit()
+    return json.dumps(course.serialize()), 200
 
 
-@app.route("/api/courses/<int:course_id>/comments")
-def get_course_comments():
+@app.route("/api/courses/<int:course_id>/comments/")
+def get_course_comments(course_id):
     pass
 
 
@@ -84,7 +118,7 @@ def update_user():
     pass
 
 
-@app.route("/api/users/<int:user_id>/comments")
+@app.route("/api/users/<int:user_id>/comments/")
 def get_user_comments():
     pass
 
@@ -94,18 +128,13 @@ def del_user():
     pass
 
 
-@app.route("/api/users/<int:user_id>/comments", methods=["POST"])
+@app.route("/api/users/<int:user_id>/comments/", methods=["POST"])
 def add_comment():
     pass
 
 
 @app.route("/api/comments/", methods=["POST"])
 def del_comment():
-    pass
-
-
-@app.route("/api/courses/<int:course_id>/rating", methods=["POST"])
-def add_rating():
     pass
 
 
