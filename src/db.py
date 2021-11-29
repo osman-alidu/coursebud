@@ -11,7 +11,7 @@ class Course(db.Model):
     description = db.Column(db.String, nullable=False)
     professors = db.Column(db.String, nullable=False)
     rating = db.Column(db.Integer, nullable=False)
-    ratings = db.Column(db.String, nullable=False)
+    allratings = db.Column(db.String, nullable=False)
     comments = db.relationship("Comment", cascade="delete")
 
     def __init__(self, **kwargs):
@@ -20,7 +20,7 @@ class Course(db.Model):
         self.description = kwargs.get("description")
         self.professors = kwargs.get("professors")
         self.rating = kwargs.get("rating")
-        self.ratings = kwargs.get("ratings")
+        self.allratings = kwargs.get("allratings")
 
     def full_serialize(self):
         return {
@@ -30,7 +30,7 @@ class Course(db.Model):
             "description": self.description,
             "professors": self.professors,
             "rating": self.rating,
-            "ratings": self.ratings,
+            "allratings": self.allratings,
             "comments": [c.sub_serialize() for c in self.comments]
         }
 

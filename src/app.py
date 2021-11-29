@@ -58,7 +58,7 @@ def create_course():
         description=body.get('description'),
         professors=body.get('professors'),
         rating=0,
-        ratings="0",
+        allratings="0",
         comments=[]
     )
     db.session.add(new_course)
@@ -81,14 +81,14 @@ def update_course(course_id):
         return failure_response("course not found!")
     body = json.loads(request.data)
     n_rating = body.get('rating')
-    rating_lst = list(course.ratings + str(n_rating))
-    course.code = body.get('code', course.code),
-    course.name = body.get('name', course.name),
-    course.description = body.get('description', course.description),
-    course.professors = body.get('professors', course.professors),
-    course.rating = avg(rating_lst),
-    course.ratings = course.ratings + str(n_rating),
-    course.comments = course.comments,
+    rating_lst = list(course.allratings + str(n_rating))
+    course.code = body.get('code', course.code)
+    course.name = body.get('name', course.name)
+    course.description = body.get('description', course.description)
+    course.professors = body.get('professors', course.professors)
+    course.rating = avg(rating_lst)
+    course.allratings = course.allratings + str(n_rating)
+    course.comments = body.get('comments', course.comments)
     db.session.commit()
     return success_response(course.serialize(), 201)
 
