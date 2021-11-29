@@ -103,9 +103,15 @@ def del_course(course_id):
     return json.dumps(course.serialize()), 200
 
 
-@app.route("/api/courses/<int:course_id>/comments/")
-def get_course_comments(course_id):
-    pass
+@app.route("/api/courses/<int:ncourse_id>/comments/")
+def get_course_comments(ncourse_id):
+    course = Course.query.filter_by(id=ncourse_id).first()
+    if course is None:
+        return failure_response("course not found!", 404)
+    com_list = [t.serialize()
+                for t in Comment.query.filter_by(course_id=ncourse_id)]
+    db.session.commit()
+    return json.dumps({"comments": com_list}), 200
 
 
 @app.route("/api/users/", methods=["POST"])
@@ -118,9 +124,15 @@ def update_user():
     pass
 
 
-@app.route("/api/users/<int:user_id>/comments/")
-def get_user_comments():
-    pass
+@app.route("/api/users/<int:nuser_id>/comments/")
+def get_user_comments(nuser_id):
+    user = User.query.filter_by(id=nuser_id).first()
+    if user is None:
+        return failure_response("user not found!", 404)
+    com_list = [t.serialize()
+                for t in Comment.query.filter_by(user_id=nuser_id)]
+    db.session.commit()
+    return json.dumps({"comments": com_list}), 200
 
 
 @app.route("/api/users/<int:user_id>/")
