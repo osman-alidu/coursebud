@@ -33,13 +33,6 @@ def str_lst_sum(lst):
 def avg(lst):
     return str_lst_sum(lst)/len(lst)
 
-# your routes here
-
-
-@ app.route("/")
-def hello_world():
-    return "Hello world!"
-
 
 @app.route("/api/courses/")
 def get_courses():
@@ -78,7 +71,7 @@ def get_course(course_id):
 def update_course(course_id):
     course = Course.query.filter_by(id=course_id).first()
     if course is None:
-        return failure_response("course not found!")
+        return failure_response("Course not found!")
     body = json.loads(request.data)
     n_rating = body.get('rating')
     rating_lst = list(course.allratings + str(n_rating))
@@ -97,7 +90,7 @@ def update_course(course_id):
 def del_course(course_id):
     course = Course.query.filter_by(id=course_id).first()
     if course is None:
-        return failure_response("course not found!", 404)
+        return failure_response("Course not found!", 404)
     db.session.delete(course)
     db.session.commit()
     return json.dumps(course.serialize()), 200
@@ -107,7 +100,7 @@ def del_course(course_id):
 def get_course_comments(ncourse_id):
     course = Course.query.filter_by(id=ncourse_id).first()
     if course is None:
-        return failure_response("course not found!", 404)
+        return failure_response("Course comments not found!", 404)
     com_list = [t.serialize()
                 for t in Comment.query.filter_by(course_id=ncourse_id)]
     db.session.commit()
@@ -116,12 +109,48 @@ def get_course_comments(ncourse_id):
 
 @app.route("/api/users/", methods=["POST"])
 def create_user():
-    pass
+    body = json.loads(request.data)
+    name = body.get('name')
+    if name == None:
+        return failure_response("Invalid User", 400)
+    new_user = User(
+        name,
+        comments=[]
+    )
+    db.session.add(new_user)
+    db.session.commit()
+    return json.dumps(new_user.serialize()), 201
+
+
+@app.route('/api/users/<int:user_id>/')
+def get_user(user_id):
+    user = User.query.filter_by(id=user_id).first()
+    if user is None:
+        return failure_response("User not found!", 404)
+    return json.dumps(user.serialize()), 200
 
 
 @app.route("/api/users/<int:user_id>/")
-def update_user():
-    pass
+def update_user(user_id):
+    user = User.query.filter_by(id=user_id).first()
+    if user is None:
+        return failure_response('User not found!')
+    body = json.loads(request.data)
+    user.id = body.get('user', user.id)
+    user.name = body.get('name', user.name)
+    user.comments = body.get('comments', user.comments)
+    db.session.commit()
+    return success_response(user.serialize(), 201)
+
+
+@app.route("/api/users/<int:user_id>/")
+def del_user(user_id):
+    user = User.query.filter_by(id=user_id).first()
+    if user is None:
+        return failure_response("User not found!")
+    db.session.delete(user)
+    db.session.commit()
+    return success_response(user.serialize())
 
 
 @app.route("/api/users/<int:nuser_id>/comments/")
@@ -135,18 +164,52 @@ def get_user_comments(nuser_id):
     return json.dumps({"comments": com_list}), 200
 
 
-@app.route("/api/users/<int:user_id>/")
-def del_user():
-    pass
-
-
 @app.route("/api/users/<int:user_id>/comments/", methods=["POST"])
 def add_comment():
-    pass
+    body = json.loads(request.data)
+    text = body.get('text')
+    course_id = body.get('course_id')
+    user_id = body.get('user_id')
+    if text is None or course_id is None or user_id is None:
+        return failure_response("Invalid comment", 400)
+    new_comment = Comment(text, course_id, user_id)
+    db.session.add(new_comment)
+    db.session.commit()
+    return json.dumps(new_comment.serialize()), 201
 
 
 @app.route("/api/comments/", methods=["POST"])
-def del_comment():
+def del_comment(course_id):
+    # not sure if this also deletes from user_id
+    comment = Comment.query.filter_by(id=course_id).first()
+    if comment is None:
+        return failure_response("Comment not found!")
+    db.session.delete(comment)
+    db.session.commit()
+    return success_response(comment.serialize())
+
+
+def extract_token(request):
+    pass
+
+
+@app.route("/register/", methods=["POST"])
+def register_account():
+    pass
+
+
+@app.route("/login/", methods=["POST"])
+def login():
+    pass
+
+
+@app.route("/session/", methods=["POST"])
+def update_session():
+    pass
+
+
+@app.route("/secret/", methods=["GET"])
+def secret_message():
     pass
 
 
