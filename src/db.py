@@ -91,11 +91,11 @@ class User(db.Model):
     comments = db.relationship("Comment", cascade="delete")
 
     email = db.Column(db.String, nullable=False, unique=True)
-    password_digest = db.Column(db.String, nullable=False)
+    # password_digest = db.Column(db.String, nullable=False)
 
-    session_token = db.Column(db.String, nullable=False, unique=True)
-    session_expiration = db.Column(db.DateTime, nullable=False)
-    update_token = db.Column(db.String, nullable=False, unique=True)
+    # session_token = db.Column(db.String, nullable=False, unique=True)
+    # session_expiration = db.Column(db.DateTime, nullable=False)
+    # update_token = db.Column(db.String, nullable=False, unique=True)
 
     def __init__(self, **kwargs):
         self.name = kwargs.get("name")
