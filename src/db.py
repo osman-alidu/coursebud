@@ -36,7 +36,7 @@ class Course(db.Model):
             "professors": self.professors,
             "rating": self.rating,
             "allratings": self.allratings,
-            "comments": [c.sub_serialize() for c in self.comments]
+            "comments": [c.simple_serialize() for c in self.comments]
         }
 
     def serialize(self):
@@ -47,7 +47,7 @@ class Course(db.Model):
             "description": self.description,
             "professors": self.professors,
             "rating": self.rating,
-            "comments": [c.sub_serialize() for c in self.comments]
+            "comments": [c.simple_serialize() for c in self.comments]
         }
 
     def simple_serialize(self):
@@ -79,8 +79,14 @@ class Comment(db.Model):
         return {
             "id": self.id,
             "text": self.text,
-            "course": (Course.query.filter_by(id=self.course_id).first()).ass_serialize(),
-            "user": (User.query.filter_by(id=self.user_id).first()).ass_serialize()
+            "course": (Course.query.filter_by(id=self.course_id).first()).simple_serialize(),
+            "user": (User.query.filter_by(id=self.user_id).first()).simple_serialize()
+        }
+
+    def simple_serialize(self):
+        return {
+            "id": self.id,
+            "text": self.text,
         }
 
 
@@ -88,51 +94,24 @@ class User(db.Model):
     __tablename__ = "user"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
-    comments = db.relationship("Comment", cascade="delete")
-
     email = db.Column(db.String, nullable=False, unique=True)
-    password_digest = db.Column(db.String, nullable=False)
-
-    session_token = db.Column(db.String, nullable=False, unique=True)
-    session_expiration = db.Column(db.DateTime, nullable=False)
-    update_token = db.Column(db.String, nullable=False, unique=True)
+    comments = db.relationship("Comment", cascade="delete")
 
     def __init__(self, **kwargs):
         self.name = kwargs.get("name")
         self.email = kwargs.get("email")
-        # self.password_digest = bcrypt.hashpw(kwargs.get(
-        #     "password").encode("utf8"), bcrypt.gensalt(rounds=13))
-        self.renew_session()
 
     def serialize(self):
         return {
             "id": self.id,
             "name": self.name,
-            "comments": [s.serialize() for s in self.comments],
+            "email": self.email,
+            "comments": [s.simple_serialize() for s in self.comments],
         }
 
     def simple_serialize(self):
         return {
             "id": self.id,
             "name": self.name,
+            "email": self.email
         }
-
-    # # Used to randomly generate session/update tokens
-    # def _urlsafe_base_64(self):
-    #     return hashlib.sha1(os.urandom(64)).hexdigest()
-
-    # # Generates new tokens, and resets expiration time
-    # def renew_session(self):
-    #     self.session_token = self._urlsafe_base_64()
-    #     self.session_expiration = datetime.datetime.now() + datetime.timedelta(days=1)
-    #     self.update_token = self._urlsafe_base_64()
-
-    # def verify_password(self, password):
-    #     return bcrypt.checkpw(password.encode("utf8"), self.password_digest)
-
-    # # Checks if session token is valid and hasn't expired
-    # def verify_session_token(self, session_token):
-    #     return session_token == self.session_token and datetime.datetime.now() < self.session_expiration
-
-    # def verify_update_token(self, update_token):
-    #     return update_token == self.update_token
