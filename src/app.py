@@ -35,6 +35,7 @@ def avg(lst):
     return str_lst_sum(lst)/len(lst)
 
 
+@app.route("/")
 @app.route("/api/courses/")
 def get_courses():
     courses = [t.serialize() for t in Course.query.all()]
