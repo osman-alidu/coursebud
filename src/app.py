@@ -1,4 +1,5 @@
 from db import *
+from table_init import *
 import json
 from flask import Flask, request
 import os
@@ -14,6 +15,7 @@ app.config["SQLALCHEMY_ECHO"] = True
 db.init_app(app)
 with app.app_context():
     db.create_all()
+    course_init()
 
 
 def success_response(data, code=200):
