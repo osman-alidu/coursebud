@@ -1,6 +1,6 @@
 version: "3"
 services:
   demo:
-    image: "Hack_challenge: courseBud"
+    image: "coursebud:test"
     ports:
       - 5000:5000

@@ -1,6 +1,7 @@
 from db import *
 import json
 from flask import Flask, request
+import os
 
 
 app = Flask(__name__)
@@ -189,29 +190,30 @@ def del_comment(course_id):
     return success_response(comment.serialize())
 
 
-def extract_token(request):
-    pass
+# def extract_token(request):
+#     pass
 
 
-@app.route("/register/", methods=["POST"])
-def register_account():
-    pass
+# @app.route("/register/", methods=["POST"])
+# def register_account():
+#     pass
 
 
-@app.route("/login/", methods=["POST"])
-def login():
-    pass
+# @app.route("/login/", methods=["POST"])
+# def login():
+#     pass
 
 
-@app.route("/session/", methods=["POST"])
-def update_session():
-    pass
+# @app.route("/session/", methods=["POST"])
+# def update_session():
+#     pass
 
 
-@app.route("/secret/", methods=["GET"])
-def secret_message():
-    pass
+# @app.route("/secret/", methods=["GET"])
+# def secret_message():
+#     pass
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
