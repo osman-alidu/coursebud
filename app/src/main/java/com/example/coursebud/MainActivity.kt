@@ -1,5 +1,6 @@
 package com.example.coursebud
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -26,11 +27,13 @@ class MainActivity : AppCompatActivity() {
         signupBtn = findViewById(R.id.signUpBtn)
 
         loginBtn.setOnClickListener {
-
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
         }
 
         signupBtn.setOnClickListener {
-
+            val intent = Intent(this, SignUpActivity::class.java)
+            startActivity(intent)
         }
     }
 }

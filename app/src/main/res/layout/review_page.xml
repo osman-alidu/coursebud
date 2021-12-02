@@ -9,7 +9,6 @@
         android:id="@+id/addReviewButton"
         android:layout_width="309dp"
         android:layout_height="48dp"
-        android:layout_constraintLeft_toRightOf=""
         android:backgroundTint="@color/red"
         android:text="Add a review"
         app:layout_constraintBottom_toBottomOf="parent"
