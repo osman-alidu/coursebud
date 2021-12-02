@@ -11,7 +11,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var loginText : TextView
     private lateinit var loginBtn : Button
     private lateinit var signupText : TextView
-    private lateinit var signUpBtn : Button
+    private lateinit var signupBtn : Button
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,7 +23,14 @@ class MainActivity : AppCompatActivity() {
         loginText = findViewById(R.id.loginText)
         loginBtn = findViewById(R.id.loginBtn)
         signupText = findViewById(R.id.signupText)
-        signUpBtn = findViewById(R.id.signUpBtn)
+        signupBtn = findViewById(R.id.signUpBtn)
 
+        loginBtn.setOnClickListener {
+
+        }
+
+        signupBtn.setOnClickListener {
+
+        }
     }
 }
