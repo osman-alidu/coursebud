@@ -5,18 +5,6 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:id="@+id/overallRatingText3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Overall Rating"
-        app:layout_constraintBottom_toTopOf="@+id/addReviewButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.163"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.868" />
-
     <Button
         android:id="@+id/addReviewButton"
         android:layout_width="309dp"
@@ -55,5 +43,13 @@
         app:layout_constraintHorizontal_bias="0.147"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addReviewButton" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="308dp"
+        android:layout_height="354dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
