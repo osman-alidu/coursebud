@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity" >
 
     <TextView
         android:id="@+id/appTitle"
@@ -21,38 +21,71 @@
 
     <TextView
         android:id="@+id/intro"
-        android:layout_width="800px"
+        android:layout_width="900px"
         android:layout_height="wrap_content"
         android:text="Find and write reviews about your courses at Cornell from fellow students. "
         android:layout_marginTop="60px"
         android:background="@color/grey"
         android:textColor="@color/white"
-        android:textSize="24dp"
+        android:textSize="20dp"
         android:paddingLeft="50px"
         android:paddingTop="100px"
         android:paddingBottom="100px"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appTitle" />
+        app:layout_constraintTop_toBottomOf="@id/appTitle" />
 
-    <Button
-        android:id="@+id/signUpBtn"
-        android:layout_width="450px"
+    <TextView
+        android:id="@+id/loginText"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100px"
-        android:text="Sign In"
+        android:text="to get started, first:"
+        android:textColor="@color/black"
+        android:textSize="15dp"
+        android:layout_marginTop="80px"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/intro" />
+        app:layout_constraintTop_toBottomOf="@id/intro" />
 
-    <Button
+    <android.widget.Button
         android:id="@+id/loginBtn"
-        android:layout_width="450px"
+        android:layout_width="600px"
+        android:layout_height="wrap_content"
+        android:text="login"
+        android:textStyle="bold"
+        android:textSize="18dp"
+        android:background="@drawable/button"
+        android:textColor="@color/black"
+        android:layout_marginTop="20px"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/loginText" />
+
+    <TextView
+        android:id="@+id/signupText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:text="or, if you’re new here, "
+        android:textColor="@color/black"
+        android:layout_marginTop="60px"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/loginBtn" />
+
+    <android.widget.Button
+        android:id="@+id/signUpBtn"
+        android:layout_width="600px"
         android:layout_height="wrap_content"
         android:text="Sign Up"
-        android:layout_marginTop="100px"
+        android:textStyle="bold"
+        android:textSize="18dp"
+        android:background="@drawable/button"
+        android:textColor="@color/black"
+        android:layout_marginTop="20px"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signUpBtn"/>
+        app:layout_constraintTop_toBottomOf="@id/signupText" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
