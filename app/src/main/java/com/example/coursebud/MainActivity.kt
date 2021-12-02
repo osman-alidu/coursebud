@@ -7,15 +7,23 @@ import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
     private lateinit var appTitle : TextView
-    private lateinit var signUpBtn : Button
+    private lateinit var intro : TextView
+    private lateinit var loginText : TextView
     private lateinit var loginBtn : Button
+    private lateinit var signupText : TextView
+    private lateinit var signUpBtn : Button
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         appTitle = findViewById(R.id.appTitle)
-        signUpBtn = findViewById(R.id.signUpBtn)
+        intro = findViewById(R.id.intro)
+        loginText = findViewById(R.id.loginText)
         loginBtn = findViewById(R.id.loginBtn)
+        signupText = findViewById(R.id.signupText)
+        signUpBtn = findViewById(R.id.signUpBtn)
+
     }
 }
