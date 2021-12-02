@@ -1,6 +1,7 @@
 from db import *
 import json
 from flask import Flask, request
+import os
 
 
 app = Flask(__name__)
@@ -23,13 +24,18 @@ def failure_response(message, code=404):
     return json.dumps({"success": False, "error": message}), code
 
 
-# your routes here
+def str_lst_sum(lst):
+    sum = 0
+    for x in lst:
+        sum += int(x)
+    return sum
 
-@ app.route("/")
-def hello_world():
-    return "Hello world!"
+
+def avg(lst):
+    return str_lst_sum(lst)/len(lst)
 
 
+@app.route("/")
 @app.route("/api/courses/")
 def get_courses():
     courses = [t.serialize() for t in Course.query.all()]
@@ -47,6 +53,7 @@ def create_course():
         description=body.get('description'),
         professors=body.get('professors'),
         rating=0,
+        allratings="0",
         comments=[]
     )
     db.session.add(new_course)
@@ -56,58 +63,169 @@ def create_course():
 
 @app.route("/api/courses/<int:course_id>/")
 def get_course(course_id):
-    pass
+    course = Course.query.filter_by(id=course_id).first()
+    if course is None:
+        return failure_response("Course not found!", 404)
+    return json.dumps(course.serialize()), 200
 
 
-@app.route("/api/courses/<int:course_id>/")
-def update_course():
-    pass
+@app.route("/api/courses/<int:course_id>/", methods=["POST"])
+def update_course(course_id):
+    course = Course.query.filter_by(id=course_id).first()
+    if course is None:
+        return failure_response("Course not found!")
+    body = json.loads(request.data)
+    n_rating = body.get('rating')
+    rating_lst = list(course.allratings + str(n_rating))
+    course.code = body.get('code', course.code)
+    course.name = body.get('name', course.name)
+    course.description = body.get('description', course.description)
+    course.professors = body.get('professors', course.professors)
+    course.rating = avg(rating_lst)
+    course.allratings = course.allratings + str(n_rating)
+    course.comments = body.get('comments', course.comments)
+    db.session.commit()
+    return success_response(course.serialize(), 201)
 
 
 @app.route("/api/courses/<int:course_id>/", methods=["DELETE"])
-def del_course():
-    pass
+def del_course(course_id):
+    course = Course.query.filter_by(id=course_id).first()
+    if course is None:
+        return failure_response("Course not found!", 404)
+    db.session.delete(course)
+    db.session.commit()
+    return json.dumps(course.serialize()), 200
 
 
-@app.route("/api/courses/<int:course_id>/comments")
-def get_course_comments():
-    pass
+@app.route("/api/courses/<int:ncourse_id>/comments/")
+def get_course_comments(ncourse_id):
+    course = Course.query.filter_by(id=ncourse_id).first()
+    if course is None:
+        return failure_response("Course comments not found!", 404)
+    com_list = [t.serialize()
+                for t in Comment.query.filter_by(course_id=ncourse_id)]
+    db.session.commit()
+    return json.dumps({"comments": com_list}), 200
 
 
 @app.route("/api/users/", methods=["POST"])
 def create_user():
-    pass
+    body = json.loads(request.data)
+    name = body.get('name')
+    email = body.get('email')
+    if name == None or email == None:
+        return failure_response("Invalid User", 400)
+    new_user = User(
+        name=body.get('name'),
+        email=body.get('email'),
+        comments=[]
+    )
+    db.session.add(new_user)
+    db.session.commit()
+    return json.dumps(new_user.serialize()), 201
 
 
-@app.route("/api/users/<int:user_id>/")
-def update_user():
-    pass
+@app.route('/api/users/<int:user_id>/')
+def get_user(user_id):
+    user = User.query.filter_by(id=user_id).first()
+    if user is None:
+        return failure_response("User not found!", 404)
+    return json.dumps(user.serialize()), 200
 
 
-@app.route("/api/users/<int:user_id>/comments")
-def get_user_comments():
-    pass
+@app.route("/api/users/<int:user_id>/", methods=["POST"])
+def update_user(user_id):
+    user = User.query.filter_by(id=user_id).first()
+    if user is None:
+        return failure_response('User not found!')
+    body = json.loads(request.data)
+    user.name = body.get('name', user.name)
+    user.email = body.get('email', user.email)
+    user.comments = body.get('comments', user.comments)
+    db.session.commit()
+    return success_response(user.serialize(), 201)
 
 
-@app.route("/api/users/<int:user_id>/")
-def del_user():
-    pass
+@app.route("/api/users/<int:user_id>/", methods=["DELETE"])
+def del_user(user_id):
+    user = User.query.filter_by(id=user_id).first()
+    if user is None:
+        return failure_response("User not found!")
+    db.session.delete(user)
+    db.session.commit()
+    return success_response(user.serialize())
 
 
-@app.route("/api/users/<int:user_id>/comments", methods=["POST"])
-def add_comment():
-    pass
+@app.route("/api/users/<int:nuser_id>/comments/")
+def get_user_comments(nuser_id):
+    user = User.query.filter_by(id=nuser_id).first()
+    if user is None:
+        return failure_response("user not found!", 404)
+    com_list = [t.serialize()
+                for t in Comment.query.filter_by(user_id=nuser_id)]
+    db.session.commit()
+    return json.dumps({"comments": com_list}), 200
 
 
-@app.route("/api/comments/", methods=["POST"])
-def del_comment():
-    pass
+@app.route("/api/users/<int:user_id>/<int:course_id>/comments/", methods=["POST"])
+def add_comment(user_id, course_id):
+    body = json.loads(request.data)
+    text = body.get('text')
+    if text is None:
+        return failure_response("Invalid comment", 400)
+    new_comment = Comment(
+        text=body.get('text'),
+        course_id=course_id,
+        user_id=user_id
+    )
+    db.session.add(new_comment)
+    db.session.commit()
+    return json.dumps(new_comment.serialize()), 201
 
 
-@app.route("/api/courses/<int:course_id>/rating", methods=["POST"])
-def add_rating():
-    pass
+@app.route('/api/comments/<int:comment_id>/')
+def get_comment(comment_id):
+    comment = Comment.query.filter_by(id=comment_id).first()
+    if comment is None:
+        return failure_response("comment not found!", 404)
+    return json.dumps(comment.serialize()), 200
+
+
+@app.route("/api/comments/<int:comment_id>/", methods=["DELETE"])
+def del_comment(comment_id):
+    comment = Comment.query.filter_by(id=comment_id).first()
+    if comment is None:
+        return failure_response("Comment not found!")
+    db.session.delete(comment)
+    db.session.commit()
+    return success_response(comment.serialize())
+
+
+# def extract_token(request):
+#     pass
+
+
+# @app.route("/register/", methods=["POST"])
+# def register_account():
+#     pass
+
+
+# @app.route("/login/", methods=["POST"])
+# def login():
+#     pass
+
+
+# @app.route("/session/", methods=["POST"])
+# def update_session():
+#     pass
+
+
+# @app.route("/secret/", methods=["GET"])
+# def secret_message():
+#     pass
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
