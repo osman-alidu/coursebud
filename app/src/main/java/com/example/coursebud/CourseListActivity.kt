@@ -15,7 +15,7 @@ class CourseListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_course_list)
 
-        list = findViewById<RecyclerView>(R.id.list)
+        list = findViewById(R.id.list)
 
         list.setHasFixedSize(true)
         // use a linear layout manager

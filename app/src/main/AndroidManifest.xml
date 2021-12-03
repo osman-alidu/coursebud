@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Coursebud">
         <activity
+            android:name=".MakeReviewActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ReviewPageActivity"
+            android:exported="true" />
+        <activity
             android:name=".SignUpActivity"
             android:exported="true" />
         <activity
