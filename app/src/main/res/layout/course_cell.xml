@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:maxHeight="150dp"
-    android:background="@color/white">
+    android:background="@drawable/cell">
 
     <TextView
         android:id="@+id/rating"
@@ -23,14 +23,14 @@
 
     <TextView
         android:id="@+id/courseName"
-        android:layout_width="wrap_content"
+        android:layout_width="260dp"
         android:layout_height="wrap_content"
         android:text="Intermediate Spanish"
         android:textSize="23dp"
         android:textColor="@color/black"
         android:textStyle="bold"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="35dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@id/rating"/>
 
