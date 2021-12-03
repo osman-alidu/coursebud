@@ -28,8 +28,8 @@ class CourseAdapter(private val courses: List<Course>) : RecyclerView.Adapter<Co
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val course = courses[position]
         holder.rating.text = course.rating.toString()
-        holder.courseName.text = course.courseName
-        holder.reviewNumber.text = course.reviewNumber
+        holder.courseName.text = course.name
+        holder.reviewNumber.text = course.comments.size.toString()
         holder.reviews.text = "reviews"
         holder.code.text = course.code
 
