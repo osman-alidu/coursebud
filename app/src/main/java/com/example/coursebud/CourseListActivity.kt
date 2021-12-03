@@ -35,8 +35,8 @@ class CourseListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_course_list)
 
-        searchBarBack = findViewById(R.id.searchBarBack)
-        searchBar = findViewById(R.id.searchBar)
+//        searchBarBack = findViewById(R.id.searchBarBack)
+//        searchBar = findViewById(R.id.searchBar)
         results = findViewById(R.id.results)
         list = findViewById(R.id.list)
 
