@@ -27,7 +27,7 @@ class CourseListActivity : AppCompatActivity() {
     private val client = OkHttpClient()
     private val moshi = Moshi.Builder().addLast(KotlinJsonAdapterFactory()).build()
     private val courseJsonAdapter = moshi.adapter(Course::class.java)
-    private val courseListType = Types.newParameterizedType(List::class.java, Course::class.java)
+    private val courseListType = Types.newParameterizedType(Course::class.java, Course::class.java)
     private val courseListJsonAdapter : JsonAdapter<Course> = moshi.adapter(courseListType)
 
 
