@@ -5,8 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <Button
+        android:id="@+id/submitReviewButton"
+        android:layout_width="309dp"
+        android:layout_height="48dp"
+        android:backgroundTint="@color/red"
+        android:text="Submit review"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.734" />
+
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/leaveReviewText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Leave a Review"
@@ -20,15 +32,15 @@
         app:layout_constraintVertical_bias="0.125" />
 
     <TextView
-        android:id="@+id/textView4"
-        android:layout_width="266dp"
-        android:layout_height="508dp"
+        android:id="@+id/writeReviewBox"
+        android:layout_width="300dp"
+        android:layout_height="250dp"
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
-        app:layout_constraintVertical_bias="0.423" />
+        app:layout_constraintTop_toBottomOf="@+id/leaveReviewText"
+        app:layout_constraintVertical_bias="0.166" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
