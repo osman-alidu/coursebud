@@ -4,32 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".LoginActivity"
+    android:background="@color/backgroundRed">
 
     <TextView
         android:id="@+id/loginTitle"
-        android:fontFamily="sans-serif-black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="log in"
-        android:textColor="@color/black"
+        android:layout_marginTop="150dp"
+        android:fontFamily="@font/amaranth"
+        android:text="Log in"
+        android:textColor="@color/white"
         android:textSize="48dp"
         android:textStyle="bold"
-        android:layout_marginTop="150dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/nameText"
         android:layout_width="118dp"
         android:layout_height="35dp"
-        android:text="Username:"
-        android:textColor="@color/black"
-        android:textSize="24dp"
-        android:textStyle="bold"
         android:layout_marginStart="30dp"
         android:layout_marginTop="270dp"
+        android:fontFamily="@font/amaranth"
+        android:text="Username:"
+        android:textColor="@color/white"
+        android:textSize="24dp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -37,13 +39,13 @@
         android:id="@+id/nameInput"
         android:layout_width="220dp"
         android:layout_height="35dp"
-        android:layout_marginTop="270dp"
         android:layout_marginStart="10dp"
+        android:layout_marginTop="270dp"
+        android:autofillHints="username"
+        android:background="@color/buttonOffWhite"
         android:maxLength="18"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
-        android:autofillHints="username"
-        android:background="@color/grey"
         app:layout_constraintStart_toEndOf="@+id/nameText"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -53,8 +55,9 @@
         android:layout_height="35dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="30dp"
+        android:fontFamily="@font/amaranth"
         android:text="Password:"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="24dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -62,15 +65,15 @@
 
     <EditText
         android:id="@+id/pwInput"
-        android:autofillHints="password"
         android:layout_width="220dp"
         android:layout_height="35dp"
         android:layout_marginStart="10dp"
+        android:layout_marginTop="30dp"
+        android:autofillHints="password"
+        android:background="@color/buttonOffWhite"
         android:maxLength="18"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
-        android:layout_marginTop="30dp"
-        android:background="@color/grey"
         app:layout_constraintStart_toEndOf="@+id/pwText"
         app:layout_constraintTop_toBottomOf="@+id/nameInput" />
 
@@ -78,11 +81,11 @@
         android:id="@+id/nextArrow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="→"
-        android:textColor="@color/black"
-        android:textSize="60dp"
         android:layout_marginEnd="35dp"
         android:layout_marginBottom="50dp"
+        android:text="→"
+        android:textColor="@color/buttonOffWhite"
+        android:textSize="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

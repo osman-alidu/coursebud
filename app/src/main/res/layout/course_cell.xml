@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:maxHeight="150dp"
-    android:background="@drawable/cell">
+    android:background="@color/white">
 
     <TextView
         android:id="@+id/rating"
@@ -38,36 +38,36 @@
         android:id="@+id/review_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="16dp"
         android:text="10"
         android:textColor="@color/black"
         android:textSize="18dp"
-        android:layout_marginStart="23dp"
-        android:layout_marginBottom="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/rating"/>
+        app:layout_constraintStart_toEndOf="@id/rating" />
 
     <TextView
         android:id="@+id/reviews"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginBottom="16dp"
         android:text="reviews"
         android:textColor="@color/black"
         android:textSize="18dp"
-        android:layout_marginBottom="40dp"
-        android:layout_marginStart="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/review_number"/>
+        app:layout_constraintStart_toEndOf="@id/review_number" />
 
     <TextView
         android:id="@+id/code"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="16dp"
         android:text="CS1110"
         android:textColor="@color/black"
         android:textSize="18dp"
         android:textStyle="italic"
-        android:layout_marginBottom="40dp"
-        android:layout_marginStart="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/reviews" />
 

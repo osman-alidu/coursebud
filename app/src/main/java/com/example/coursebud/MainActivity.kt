@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
         appTitle = findViewById(R.id.appTitle)
         intro = findViewById(R.id.intro)
         loginText = findViewById(R.id.loginText)
