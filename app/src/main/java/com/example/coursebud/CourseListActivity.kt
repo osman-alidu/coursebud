@@ -2,6 +2,7 @@ package com.example.coursebud
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.SearchView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,7 +28,7 @@ class CourseListActivity : AppCompatActivity() {
     private val moshi = Moshi.Builder().addLast(KotlinJsonAdapterFactory()).build()
     private val courseJsonAdapter = moshi.adapter(Course::class.java)
     private val courseListType = Types.newParameterizedType(List::class.java, Course::class.java)
-    private val courseListJsonAdapter : JsonAdapter<List<Course>> = moshi.adapter(courseListType)
+    private val courseListJsonAdapter : JsonAdapter<Course> = moshi.adapter(courseListType)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,27 +53,30 @@ class CourseListActivity : AppCompatActivity() {
     }
 
     private fun populateCourseList() {
-        val requestGet = Request.Builder().url(BASE_URL + "api/courses").build()
-        client.newCall(requestGet).enqueue(object: Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                e.printStackTrace()
-            }
+        lateinit var requestGet : Request
+        for (i in 1..5) {
+            requestGet = Request.Builder().url(BASE_URL + "/api/courses/"+i.toString()).build()
+            client.newCall(requestGet).enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+                    e.printStackTrace()
+                    Log.d("debug", "failure" )
+                }
 
-            override fun onResponse(call: Call, response: Response) {
-                response.use {
-                    if (!it.isSuccessful) {
-                        throw IOException("Network call unsuccessful")
-                    }
-                    val courseList = courseListJsonAdapter.fromJson(response.body!!.string())!!
-                    for (course in courseList) {
+                override fun onResponse(call: Call, response: Response) {
+                    Log.d("debug", "On Response")
+                    response.use {
+                        if (!it.isSuccessful) {
+                            throw IOException("Network call unsuccessful")
+                        }
+                        val course = courseListJsonAdapter.fromJson(response.body!!.string())!!
                         courses.add(course)
-                    }
-                    adapter = CourseAdapter(courses)
-                    runOnUiThread {
-                        list.adapter = adapter
+                        adapter = CourseAdapter(courses)
+                        runOnUiThread {
+                            list.adapter = adapter
+                        }
                     }
                 }
-            }
-        })
+            })
+        }
     }
 }

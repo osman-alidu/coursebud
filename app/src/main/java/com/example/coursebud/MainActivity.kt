@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 
-const val BASE_URL = "https://appcoursebud.herokuapp.com/"
+const val BASE_URL = "https://appcoursebud.herokuapp.com"
 
 class MainActivity : AppCompatActivity() {
     private lateinit var appTitle : TextView
