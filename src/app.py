@@ -33,7 +33,9 @@ def str_lst_sum(lst):
     return sum
 
 
-def avg(lst):
+def l_avg(lst):
+    print("-------------------------------------------------------------------")
+    print(lst)
     return str_lst_sum(lst)/len(lst)
 
 
@@ -78,13 +80,18 @@ def update_course(course_id):
         return failure_response("Course not found!")
     body = json.loads(request.data)
     n_rating = body.get('rating')
-    rating_lst = list(course.allratings + str(n_rating))
+    if n_rating > 10 or n_rating < 0:
+        return failure_response("Invalid rating!")
+    rating_str = course.allratings + "," + str(n_rating)
+    print("***********************************************")
+    print(rating_str)
+    rating_lst = rating_str.split(",")
     course.code = body.get('code', course.code)
     course.name = body.get('name', course.name)
     course.description = body.get('description', course.description)
     course.professors = body.get('professors', course.professors)
-    course.rating = avg(rating_lst)
-    course.allratings = course.allratings + str(n_rating)
+    course.rating = l_avg(rating_lst)
+    course.allratings = course.allratings + "," + str(n_rating)
     course.comments = body.get('comments', course.comments)
     db.session.commit()
     return success_response(course.serialize(), 201)
