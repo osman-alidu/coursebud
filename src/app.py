@@ -18,6 +18,14 @@ with app.app_context():
     course_init()
 
 
+def extract_token(request):
+    token = request.headers.get("Authorization")
+    if token is None:
+        return False, "Missing Authorization header"
+    token = token.replace("Bearer", "").strip()
+    return True, token
+
+
 def success_response(data, code=200):
     return json.dumps({"success": True, "data": data}), code
 
@@ -38,6 +46,89 @@ def avg(lst):
 
 
 @app.route("/")
+def hello_world():
+    return json.dumps({"message": "Hello, World!"})
+
+
+@app.route("/api/users/register/", methods=["POST"])
+def register_account():
+    body = json.loads(request.data)
+    username = body.get('username')
+    email = body.get('email')
+    password = body.get('password')
+    if email is None or password is None or username is None:
+        return failure_response("Invalid username, email or password!", 400)
+
+    created, user = create_r_user(username, email, password)
+
+    if not created:
+        return failure_response("User already exists!", 403)
+
+    return success_response({
+        "user_id": user.id,
+        "session_token": user.session_token,
+        "session_expiration": str(user.session_expiration),
+        "update_token": user.update_token
+    })
+
+
+@app.route("/api/users/login/", methods=["POST"])
+def login():
+    body = json.loads(request.data)
+    username = body.get('username')
+    email = body.get('email')
+    password = body.get('password')
+    if email is None or password is None or username is None:
+        return failure_response("Invalid username, email or password!", 400)
+
+    valid_cred, user = verify_creds(username, email, password)
+
+    if not valid_cred:
+        return failure_response("wrong password!", 403)
+
+    return success_response({
+        "user_id": user.id,
+        "session_token": user.session_token,
+        "session_expiration": str(user.session_expiration),
+        "update_token": user.update_token
+    })
+
+
+@app.route("/api/users/session/", methods=["POST"])
+def update_session():
+    success, update_token = extract_token(request)
+
+    if not success:
+        return failure_response(update_token)
+
+    valid, user = renew_session_l(update_token)
+
+    if not valid:
+        return failure_response("Invalid update token", 403)
+
+    return success_response({
+        "user_id": user.id,
+        "session_token": user.session_token,
+        "session_expiration": str(user.session_expiration),
+        "update_token": user.update_token
+    })
+
+
+@app.route("/api/users/secret/", methods=["GET"])
+def secret_message():
+    success, session_token = extract_token(request)
+
+    if not success:
+        return failure_response(session_token)
+
+    valid = verify_session(session_token)
+
+    if not valid:
+        return failure_response("Invalid session token", 403)
+
+    return success_response("Hello World!")
+
+
 @app.route("/api/courses/")
 def get_courses():
     courses = [t.serialize() for t in Course.query.all()]
@@ -114,23 +205,6 @@ def get_course_comments(ncourse_id):
     return json.dumps({"comments": com_list}), 200
 
 
-@app.route("/api/users/", methods=["POST"])
-def create_user():
-    body = json.loads(request.data)
-    name = body.get('name')
-    email = body.get('email')
-    if name == None or email == None:
-        return failure_response("Invalid User", 400)
-    new_user = User(
-        name=body.get('name'),
-        email=body.get('email'),
-        comments=[]
-    )
-    db.session.add(new_user)
-    db.session.commit()
-    return json.dumps(new_user.serialize()), 201
-
-
 @app.route('/api/users/<int:user_id>/')
 def get_user(user_id):
     user = User.query.filter_by(id=user_id).first()
@@ -145,7 +219,7 @@ def update_user(user_id):
     if user is None:
         return failure_response('User not found!')
     body = json.loads(request.data)
-    user.name = body.get('name', user.name)
+    user.username = body.get('username', user.username)
     user.email = body.get('email', user.email)
     user.comments = body.get('comments', user.comments)
     db.session.commit()
@@ -205,30 +279,6 @@ def del_comment(comment_id):
     db.session.delete(comment)
     db.session.commit()
     return success_response(comment.serialize())
-
-
-# def extract_token(request):
-#     pass
-
-
-# @app.route("/register/", methods=["POST"])
-# def register_account():
-#     pass
-
-
-# @app.route("/login/", methods=["POST"])
-# def login():
-#     pass
-
-
-# @app.route("/session/", methods=["POST"])
-# def update_session():
-#     pass
-
-
-# @app.route("/secret/", methods=["GET"])
-# def secret_message():
-#     pass
 
 
 if __name__ == "__main__":
