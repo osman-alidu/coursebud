@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-black"
         android:text="CourseBud"
-        android:textSize="34sp"
+        android:textSize="34dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,9 +20,13 @@
         app:layout_constraintVertical_bias="0.234" />
 
     <SearchView
-        android:layout_width="279dp"
+        android:layout_width="320dp"
         android:layout_height="43dp"
         android:background="@drawable/border"
+        android:backgroundTint="@color/grey"
+        android:textSize="17dp"
+        android:textColor="@color/black"
+        android:queryHint="search a course name..."
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
