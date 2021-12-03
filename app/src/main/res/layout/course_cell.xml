@@ -6,10 +6,10 @@
     android:maxHeight="150dp">
 
     <TextView
-        android:id="@+id/index"
+        android:id="@+id/rating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="1."
+        android:text="4.0"
         android:textSize="35dp"
         android:layout_marginStart="80px"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -17,51 +17,16 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/level"
+        android:id="@+id/courseName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Intro"
-        android:textSize="25dp"
+        android:text="Intermediate Spanish"
+        android:textSize="23dp"
         android:textStyle="bold"
         android:layout_marginStart="80px"
         android:layout_marginTop="100px"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@id/index"/>
-
-    <TextView
-        android:id="@+id/split_line"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="/"
-        android:textSize="25dp"
-        android:textStyle="bold"
-        android:layout_marginTop="100px"
-        android:layout_marginStart="20dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@id/level"/>
-
-    <TextView
-        android:id="@+id/course_number"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="1110"
-        android:textSize="25dp"
-        android:textStyle="bold"
-        android:layout_marginTop="100px"
-        android:layout_marginStart="30px"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@id/split_line"/>
-
-    <TextView
-        android:id="@+id/stars"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="★★★★★"
-        android:textSize="25dp"
-        android:layout_marginStart="80px"
-        android:layout_marginBottom="100px"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/index"/>
+        app:layout_constraintStart_toEndOf="@id/rating"/>
 
     <TextView
         android:id="@+id/review_number"
@@ -69,10 +34,10 @@
         android:layout_height="wrap_content"
         android:text="10"
         android:textSize="18dp"
-        android:layout_marginStart="40px"
+        android:layout_marginStart="80px"
         android:layout_marginBottom="100px"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/stars"/>
+        app:layout_constraintStart_toEndOf="@id/rating"/>
 
     <TextView
         android:id="@+id/reviews"
@@ -84,5 +49,29 @@
         android:layout_marginStart="15px"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/review_number"/>
+
+    <TextView
+        android:id="@+id/offeredIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="offered in"
+        android:textSize="18dp"
+        android:textStyle="italic"
+        android:layout_marginBottom="100px"
+        android:layout_marginStart="40px"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/reviews" />
+
+    <TextView
+        android:id="@+id/semester"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="spring"
+        android:textSize="18dp"
+        android:textStyle="italic"
+        android:layout_marginBottom="100px"
+        android:layout_marginStart="8px"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/offeredIn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

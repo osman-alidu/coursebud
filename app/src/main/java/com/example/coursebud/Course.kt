@@ -1,4 +1,3 @@
 package com.example.coursebud
 
-data class Course(val index:String, val level:String, val split_line:String,
-                  val course_number:String, val stars:String, val review_number:String, val reviews:String)
+data class Course(val rating:String, val courseName:String, val reviewNumber:String, val semester:String)

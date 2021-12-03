@@ -12,13 +12,13 @@ class CourseAdapter(private val courses: List<Course>) : RecyclerView.Adapter<Co
 
     class ViewHolder internal constructor(itemView : View) : RecyclerView.ViewHolder(itemView) {
 
-        val index : TextView = itemView.findViewById(R.id.index)
-        val level : TextView = itemView.findViewById(R.id.level)
-        val split_line : TextView = itemView.findViewById(R.id.split_line)
-        val course_number : TextView = itemView.findViewById(R.id.course_number)
-        val stars : TextView = itemView.findViewById(R.id.stars)
-        val review_number : TextView = itemView.findViewById(R.id.review_number)
+        val rating : TextView = itemView.findViewById(R.id.rating)
+        val courseName : TextView = itemView.findViewById(R.id.courseName)
+        val reviewNumber : TextView = itemView.findViewById(R.id.review_number)
         val reviews : TextView = itemView.findViewById(R.id.reviews)
+        val offeredIn : TextView = itemView.findViewById(R.id.offeredIn)
+        val semester : TextView = itemView.findViewById(R.id.semester)
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -28,13 +28,13 @@ class CourseAdapter(private val courses: List<Course>) : RecyclerView.Adapter<Co
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val course = courses[position]
-        holder.index.text = course.index
-        holder.level.text = course.level
-        holder.split_line.text = course.split_line
-        holder.course_number.text = course.course_number
-        holder.stars.text = course.stars
-        holder.review_number.text = course.review_number
-        holder.reviews.text = course.reviews
+        holder.rating.text = course.rating
+        holder.courseName.text = course.courseName
+        holder.reviewNumber.text = course.reviewNumber
+        holder.reviews.text = "reviews"
+        holder.offeredIn.text = "offered in"
+        holder.semester.text = course.semester
+
     }
 
     override fun getItemCount(): Int {
