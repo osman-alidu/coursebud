@@ -2,10 +2,17 @@ package com.example.coursebud
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.SearchView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.moshi.JsonAdapter
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.Types
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import okhttp3.*
+import java.io.IOException
 
 class CourseListActivity : AppCompatActivity() {
 
@@ -13,8 +20,16 @@ class CourseListActivity : AppCompatActivity() {
     private lateinit var searchBar : SearchView
     private lateinit var results : TextView
     private lateinit var list : RecyclerView
-    private lateinit var adapter : RecyclerView.Adapter<*>
+    private lateinit var adapter : CourseAdapter
     private lateinit var layoutManager : RecyclerView.LayoutManager
+
+    private var courses = mutableListOf<Course>() //create dataset
+    private val client = OkHttpClient()
+    private val moshi = Moshi.Builder().addLast(KotlinJsonAdapterFactory()).build()
+    private val courseJsonAdapter = moshi.adapter(Course::class.java)
+    private val courseListType = Types.newParameterizedType(Course::class.java, Course::class.java)
+    private val courseListJsonAdapter : JsonAdapter<Course> = moshi.adapter(courseListType)
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,11 +44,39 @@ class CourseListActivity : AppCompatActivity() {
         // use a linear layout manager
         layoutManager = LinearLayoutManager(this@CourseListActivity, LinearLayoutManager.VERTICAL, false)
         list.layoutManager = layoutManager
-        // create dataset, format should match what you specified 
-        // in the CourseAdapter object
-        var courses = mutableListOf<Course>()
 
+        // in the CourseAdapter object
         adapter = CourseAdapter(courses)
         list.adapter = adapter
+
+        populateCourseList()
+    }
+
+    private fun populateCourseList() {
+        lateinit var requestGet : Request
+        for (i in 1..5) {
+            requestGet = Request.Builder().url(BASE_URL + "/api/courses/"+i.toString()).build()
+            client.newCall(requestGet).enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+                    e.printStackTrace()
+                    Log.d("debug", "failure" )
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+                    Log.d("debug", "On Response")
+                    response.use {
+                        if (!it.isSuccessful) {
+                            throw IOException("Network call unsuccessful")
+                        }
+                        val course = courseListJsonAdapter.fromJson(response.body!!.string())!!
+                        courses.add(course)
+                        adapter = CourseAdapter(courses)
+                        runOnUiThread {
+                            list.adapter = adapter
+                        }
+                    }
+                }
+            })
+        }
     }
 }

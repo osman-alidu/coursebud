@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 
+const val BASE_URL = "https://appcoursebud.herokuapp.com"
+
 class MainActivity : AppCompatActivity() {
     private lateinit var appTitle : TextView
     private lateinit var intro : TextView
@@ -18,6 +20,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
 
         appTitle = findViewById(R.id.appTitle)
         intro = findViewById(R.id.intro)

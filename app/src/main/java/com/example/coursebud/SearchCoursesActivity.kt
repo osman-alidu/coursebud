@@ -15,6 +15,6 @@ class SearchCoursesActivity : AppCompatActivity() {
         setContentView(R.layout.search_courses)
 
         courseBudText = findViewById(R.id.courseBudText)
-        courseBudText = findViewById((R.id.searchView))
+        searchView = findViewById((R.id.searchView))
     }
 }

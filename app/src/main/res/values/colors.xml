@@ -10,4 +10,8 @@
     <color name="grey">#C4C4C4</color>
     <color name="red">#D10000</color>
     <color name="light_grey">#E5E5E5</color>
+    <color name="backgroundRed">#C03641</color>
+    <color name="buttonOffWhite">#F4F4DF</color>
+    <color name="buttonColorRed">#770912</color>
+
 </resources>
