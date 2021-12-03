@@ -16,8 +16,7 @@ class CourseAdapter(private val courses: List<Course>) : RecyclerView.Adapter<Co
         val courseName : TextView = itemView.findViewById(R.id.courseName)
         val reviewNumber : TextView = itemView.findViewById(R.id.review_number)
         val reviews : TextView = itemView.findViewById(R.id.reviews)
-        val offeredIn : TextView = itemView.findViewById(R.id.offeredIn)
-        val semester : TextView = itemView.findViewById(R.id.semester)
+        val code : TextView = itemView.findViewById(R.id.code)
 
     }
 
@@ -32,8 +31,7 @@ class CourseAdapter(private val courses: List<Course>) : RecyclerView.Adapter<Co
         holder.courseName.text = course.courseName
         holder.reviewNumber.text = course.reviewNumber
         holder.reviews.text = "reviews"
-        holder.offeredIn.text = "offered in"
-        holder.semester.text = course.semester
+        holder.code.text = course.code
 
     }
 

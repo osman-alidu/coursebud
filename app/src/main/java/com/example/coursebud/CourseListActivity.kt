@@ -7,25 +7,25 @@ import androidx.recyclerview.widget.RecyclerView
 
 class CourseListActivity : AppCompatActivity() {
 
-    private lateinit var recyclerView : RecyclerView
-    private lateinit var mAdapter : RecyclerView.Adapter<*>
+    private lateinit var list : RecyclerView
+    private lateinit var adapter : RecyclerView.Adapter<*>
     private lateinit var layoutManager : RecyclerView.LayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_course_list)
 
-        recyclerView = findViewById<RecyclerView>(R.id.list)
+        list = findViewById<RecyclerView>(R.id.list)
 
-        recyclerView.setHasFixedSize(true)
+        list.setHasFixedSize(true)
         // use a linear layout manager
         layoutManager = LinearLayoutManager(this@CourseListActivity, LinearLayoutManager.VERTICAL, false)
-        recyclerView.layoutManager = layoutManager
+        list.layoutManager = layoutManager
         // create dataset, format should match what you specified 
         // in the CourseAdapter object
         var courses = mutableListOf<Course>()
 
-        mAdapter = CourseAdapter(courses)
-        recyclerView.adapter = mAdapter
+        adapter = CourseAdapter(courses)
+        list.adapter = adapter
     }
 }

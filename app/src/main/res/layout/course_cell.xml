@@ -10,7 +10,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="4.0"
-        android:textSize="35dp"
+        android:textSize="33dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:background="@drawable/circle"
         android:layout_marginStart="80px"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -22,8 +26,9 @@
         android:layout_height="wrap_content"
         android:text="Intermediate Spanish"
         android:textSize="23dp"
+        android:textColor="@color/black"
         android:textStyle="bold"
-        android:layout_marginStart="80px"
+        android:layout_marginStart="50px"
         android:layout_marginTop="100px"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@id/rating"/>
@@ -33,9 +38,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="10"
+        android:textColor="@color/black"
         android:textSize="18dp"
-        android:layout_marginStart="80px"
-        android:layout_marginBottom="100px"
+        android:layout_marginStart="50px"
+        android:layout_marginBottom="110px"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/rating"/>
 
@@ -44,34 +50,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="reviews"
+        android:textColor="@color/black"
         android:textSize="18dp"
-        android:layout_marginBottom="100px"
+        android:layout_marginBottom="110px"
         android:layout_marginStart="15px"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/review_number"/>
 
     <TextView
-        android:id="@+id/offeredIn"
+        android:id="@+id/code"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="offered in"
+        android:text="CS1110"
+        android:textColor="@color/black"
         android:textSize="18dp"
         android:textStyle="italic"
-        android:layout_marginBottom="100px"
+        android:layout_marginBottom="110px"
         android:layout_marginStart="40px"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/reviews" />
-
-    <TextView
-        android:id="@+id/semester"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="spring"
-        android:textSize="18dp"
-        android:textStyle="italic"
-        android:layout_marginBottom="100px"
-        android:layout_marginStart="8px"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/offeredIn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
