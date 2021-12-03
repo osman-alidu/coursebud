@@ -26,7 +26,7 @@ class LoginActivity : AppCompatActivity() {
 
         //Need conditions: when the password and username match
         nextArrow.setOnClickListener {
-            val intent = Intent(this, SearchCoursesActivity::class.java)
+            val intent = Intent(this, CourseListActivity::class.java)
             startActivity(intent)
         }
     }

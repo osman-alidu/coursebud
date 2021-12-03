@@ -4,8 +4,8 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class Course(
-    val rating:Int,
+    val code:String,
     val name:String,
-    val comments: List<String>,
-    val code:String
+    val rating:Int,
+    val comments: List<String>
     )

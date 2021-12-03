@@ -35,7 +35,7 @@ class SignUpActivity : AppCompatActivity() {
         nextArrow = findViewById(R.id.nextArrow)
 
         nextArrow.setOnClickListener {
-            var intent = Intent(this, SearchCoursesActivity::class.java)
+            var intent = Intent(this, CourseListActivity::class.java)
             startActivity(intent)
         }
     }
