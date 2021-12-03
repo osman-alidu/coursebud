@@ -22,7 +22,14 @@ class ReviewPageActivity : AppCompatActivity() {
     private lateinit var reviewsText: TextView
     private lateinit var adapter: ReviewAdapter
     private lateinit var layoutManager: RecyclerView.LayoutManager
+
     private var reviews = mutableListOf<Review>() //create dataset
+    private val client = OkHttpClient()
+    private val moshi = Moshi.Builder().addLast(KotlinJsonAdapterFactory()).build()
+    private val ReviewAdapter = moshi.adapter(Course::class.java)
+    private val ReviewListType = Types.newParameterizedType(Review::class.java, Review::class.java)
+    private val reviewJsonAdapter : JsonAdapter<Course> = moshi.adapter(reviewListType)
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
