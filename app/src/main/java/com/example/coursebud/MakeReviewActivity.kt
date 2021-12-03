@@ -1,5 +1,6 @@
 package com.example.coursebud
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -21,6 +22,20 @@ class  MakeReviewActivity : AppCompatActivity() {
         leaveReviewText = findViewById(R.id.leaveReviewText)
         writeReviewBox = findViewById(R.id.writeReviewBox)
 
+        submitReviewButton.setOnClickListener {
+
+          //  val editedReview = N(taskEditBody.text.toString(), id!!, poster, taskEditTitle.text.toString())
+            //Repository.noteList.add(editedNote)
+
+            //val intent = Intent(this, CloudNotesActivity::class.java)
+            //startActivity(intent)
+            //updateCourse()
+        }
+
+
+    }
+
+    private fun updateCourse() {
 
     }
 }
