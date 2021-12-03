@@ -20,8 +20,8 @@ class ReviewPageActivity : AppCompatActivity() {
     private lateinit var displayReviews: RecyclerView
     private lateinit var overallRatingText: TextView
     private lateinit var reviewsText: TextView
-    private lateinit var adapter : ReviewAdapter
-    private lateinit var layoutManager : RecyclerView.LayoutManager
+    private lateinit var adapter: ReviewAdapter
+    private lateinit var layoutManager: RecyclerView.LayoutManager
     private var reviews = mutableListOf<Review>() //create dataset
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,7 +35,8 @@ class ReviewPageActivity : AppCompatActivity() {
 
         displayReviews.setHasFixedSize(true)
         // use a linear layout manager
-        layoutManager = LinearLayoutManager(this@ReviewPageActivity, LinearLayoutManager.VERTICAL, false)
+        layoutManager =
+            LinearLayoutManager(this@ReviewPageActivity, LinearLayoutManager.VERTICAL, false)
         displayReviews.layoutManager = layoutManager
 
         // in the CourseAdapter object
@@ -51,6 +52,30 @@ class ReviewPageActivity : AppCompatActivity() {
     }
 
     private fun populateReviewList() {
+        lateinit var requestGet: Request
+        for (i in 1..5) {
+            requestGet = Request.Builder().url(BASE_URL + "/api/courses/" + id + "/comments/" + i.toString()).build()
+            client.newCall(requestGet).enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+                    e.printStackTrace()
+                    Log.d("debug", "failure")
+                }
 
+                override fun onResponse(call: Call, response: Response) {
+                    Log.d("debug", "On Response")
+                    response.use {
+                        if (!it.isSuccessful) {
+                            throw IOException("Network call unsuccessful")
+                        }
+                        val remoteViews = adapter.fromJson(response.body!!.string())!!
+                        reviews.add(reviews)
+                        adapter = CourseAdapter(reviews)
+                        runOnUiThread {
+                            list.adapter = adapter
+                        }
+                    }
+                }
+            })
+        }
     }
 }
