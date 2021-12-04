@@ -20,30 +20,38 @@ class ReviewPageActivity : AppCompatActivity() {
     private lateinit var displayReviews: RecyclerView
     private lateinit var overallRatingText: TextView
     private lateinit var reviewsText: TextView
-    private lateinit var adapter: ReviewAdapter
-    private lateinit var layoutManager: RecyclerView.LayoutManager
-
+    private lateinit var adapter : ReviewAdapter
+    private lateinit var layoutManager : RecyclerView.LayoutManager
+    private lateinit var courseName : TextView
+    private lateinit var courseCode : TextView
+    private lateinit var overallRating : TextView
     private var reviews = mutableListOf<Review>() //create dataset
-    private val client = OkHttpClient()
-    private val moshi = Moshi.Builder().addLast(KotlinJsonAdapterFactory()).build()
-    private val ReviewAdapter = moshi.adapter(Course::class.java)
-    private val ReviewListType = Types.newParameterizedType(Review::class.java, Review::class.java)
-    private val reviewJsonAdapter : JsonAdapter<Course> = moshi.adapter(reviewListType)
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.review_page)
 
+        courseName = findViewById(R.id.courseName)
+        courseCode = findViewById(R.id.courseCode)
+        overallRating = findViewById(R.id.rating)
         addReviewButton = findViewById(R.id.addReviewButton)
         displayReviews = findViewById((R.id.displayReviews))
         overallRatingText = findViewById((R.id.overallRatingText))
         reviewsText = findViewById((R.id.reviewsText))
 
+        var name = intent.extras?.getString("name")
+        var rating = intent.extras?.getString("rating")
+        var code = intent.extras?.getString("code")
+        val id = intent.extras?.getString("id")
+
+        courseName.setText(name)
+        courseCode.setText(code)
+        overallRating.setText(rating)
+
+
         displayReviews.setHasFixedSize(true)
         // use a linear layout manager
-        layoutManager =
-            LinearLayoutManager(this@ReviewPageActivity, LinearLayoutManager.VERTICAL, false)
+        layoutManager = LinearLayoutManager(this@ReviewPageActivity, LinearLayoutManager.VERTICAL, false)
         displayReviews.layoutManager = layoutManager
 
         // in the CourseAdapter object
@@ -84,5 +92,7 @@ class ReviewPageActivity : AppCompatActivity() {
                 }
             })
         }
+
+
     }
 }
