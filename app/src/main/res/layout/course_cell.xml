@@ -10,16 +10,17 @@
         android:id="@+id/rating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="4.0"
-        android:textSize="33dp"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:background="@drawable/circle"
         android:layout_marginStart="27dp"
+        android:background="@drawable/circle"
+        android:backgroundTint="@color/backgroundRed"
+        android:gravity="center"
+        android:text="4.0"
+        android:textColor="@color/black"
+        android:textSize="33dp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/courseName"

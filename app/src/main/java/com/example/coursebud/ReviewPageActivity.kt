@@ -23,12 +23,12 @@ class ReviewPageActivity : AppCompatActivity() {
     private lateinit var adapter: ReviewAdapter
     private lateinit var layoutManager: RecyclerView.LayoutManager
 
-    private var reviews = mutableListOf<Review>() //create dataset
-    private val client = OkHttpClient()
-    private val moshi = Moshi.Builder().addLast(KotlinJsonAdapterFactory()).build()
-    private val ReviewAdapter = moshi.adapter(Course::class.java)
-    private val ReviewListType = Types.newParameterizedType(Review::class.java, Review::class.java)
-    private val reviewJsonAdapter : JsonAdapter<Course> = moshi.adapter(reviewListType)
+//    private var reviews = mutableListOf<Review>() //create dataset
+//    private val client = OkHttpClient()
+//    private val moshi = Moshi.Builder().addLast(KotlinJsonAdapterFactory()).build()
+//    private val ReviewAdapter = moshi.adapter(Course::class.java)
+//    private val ReviewListType = Types.newParameterizedType(Review::class.java, Review::class.java)
+//    private val reviewJsonAdapter : JsonAdapter<Course> = moshi.adapter(reviewListType)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,10 +47,10 @@ class ReviewPageActivity : AppCompatActivity() {
         displayReviews.layoutManager = layoutManager
 
         // in the CourseAdapter object
-        adapter = ReviewAdapter(reviews)
+//        adapter = ReviewAdapter(reviews)
         displayReviews.adapter = adapter
 
-        populateReviewList()
+//        populateReviewList()
 
         addReviewButton.setOnClickListener {
             val intent = Intent(this, MakeReviewActivity::class.java)
@@ -58,31 +58,31 @@ class ReviewPageActivity : AppCompatActivity() {
         }
     }
 
-    private fun populateReviewList() {
-        lateinit var requestGet: Request
-        for (i in 1..5) {
-            requestGet = Request.Builder().url(BASE_URL + "/api/courses/" + id + "/comments/" + i.toString()).build()
-            client.newCall(requestGet).enqueue(object : Callback {
-                override fun onFailure(call: Call, e: IOException) {
-                    e.printStackTrace()
-                    Log.d("debug", "failure")
-                }
-
-                override fun onResponse(call: Call, response: Response) {
-                    Log.d("debug", "On Response")
-                    response.use {
-                        if (!it.isSuccessful) {
-                            throw IOException("Network call unsuccessful")
-                        }
-                        val remoteViews = adapter.fromJson(response.body!!.string())!!
-                        reviews.add(reviews)
-                        adapter = CourseAdapter(reviews)
-                        runOnUiThread {
-                            list.adapter = adapter
-                        }
-                    }
-                }
-            })
-        }
-    }
+//    private fun populateReviewList() {
+//        lateinit var requestGet: Request
+//        for (i in 1..5) {
+//            requestGet = Request.Builder().url(BASE_URL + "/api/courses/" + id + "/comments/" + i.toString()).build()
+//            client.newCall(requestGet).enqueue(object : Callback {
+//                override fun onFailure(call: Call, e: IOException) {
+//                    e.printStackTrace()
+//                    Log.d("debug", "failure")
+//                }
+//
+//                override fun onResponse(call: Call, response: Response) {
+//                    Log.d("debug", "On Response")
+//                    response.use {
+//                        if (!it.isSuccessful) {
+//                            throw IOException("Network call unsuccessful")
+//                        }
+//                        val remoteViews = adapter.fromJson(response.body!!.string())!!
+//                        reviews.add(reviews)
+//                        adapter = CourseAdapter(reviews)
+//                        runOnUiThread {
+//                            list.adapter = adapter
+//                        }
+//                    }
+//                }
+//            })
+//        }
+//    }
 }
