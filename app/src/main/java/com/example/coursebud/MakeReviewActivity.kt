@@ -54,7 +54,12 @@ class  MakeReviewActivity : AppCompatActivity() {
                 }
             }
 
-            val intent = Intent(this, ReviewPageActivity::class.java)
+            val intent = Intent(this, ReviewPageActivity::class.java).apply{
+                putExtra("name", name)
+                putExtra("code", code)
+                putExtra("rating", rating)
+                putExtra("id", id)
+            }
             startActivity(intent)
             updateCourse()
         }
