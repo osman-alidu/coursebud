@@ -61,7 +61,7 @@
         android:id="@+id/addReviewButton"
         android:layout_width="309dp"
         android:layout_height="48dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:backgroundTint="@color/backgroundRed"
         android:fontFamily="sans-serif"
         android:text="+ Add a review"
