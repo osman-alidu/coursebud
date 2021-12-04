@@ -119,7 +119,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"code\":\"CS2110\",\n    \"name\": \"object-oriented programming\",\n    \"description\": \"sweet\",\n    \"professors\": \"David Gries, Anne Bracy\",\n    \"rating\": 5\n}",
+					"raw": "{\n    \"code\":\"CS2110\",\n    \"name\": \"object-oriented programming\",\n    \"description\": \"sweet\",\n    \"professors\": \"David Gries, Anne Bracy\",\n    \"rating\": 10\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -140,39 +140,6 @@
 						"api",
 						"courses",
 						"1",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "create user",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"name\": \"Teddy\",\n    \"email\" : \"tr99\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://0.0.0.0:5000/api/users/",
-					"protocol": "http",
-					"host": [
-						"0",
-						"0",
-						"0",
-						"0"
-					],
-					"port": "5000",
-					"path": [
-						"api",
-						"users",
 						""
 					]
 				}
@@ -211,7 +178,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"Jamie\",\n    \"email\" : \"jl77\"\n}",
+					"raw": "{\n    \"name\": \"Jamie\",\n    \"email\" : \"ona5@cornell.edu\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -219,7 +186,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://0.0.0.0:5000/api/users/2/",
+					"raw": "http://0.0.0.0:5000/api/users/1/",
 					"protocol": "http",
 					"host": [
 						"0",
@@ -231,7 +198,7 @@
 					"path": [
 						"api",
 						"users",
-						"2",
+						"1",
 						""
 					]
 				}
@@ -244,7 +211,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://0.0.0.0:5000/api/users/2/",
+					"raw": "http://0.0.0.0:5000/api/users/1/",
 					"protocol": "http",
 					"host": [
 						"0",
@@ -256,7 +223,7 @@
 					"path": [
 						"api",
 						"users",
-						"2",
+						"1",
 						""
 					]
 				}
@@ -270,7 +237,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"text\": \"I loved it!\"\n}",
+					"raw": "{\n    \"text\": \"ggghjkl;\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -278,7 +245,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://0.0.0.0:5000/api/users/1/1/comments/",
+					"raw": "http://0.0.0.0:5000/api/users/1/comments/",
 					"protocol": "http",
 					"host": [
 						"0",
@@ -290,7 +257,6 @@
 					"path": [
 						"api",
 						"users",
-						"1",
 						"1",
 						"comments",
 						""
@@ -395,6 +361,109 @@
 						"courses",
 						"1",
 						"comments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "register user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"osman\",\n    \"email\" : \"ona5@cornell.edu\",\n    \"password\": \"password3\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://0.0.0.0:5000/api/users/register/",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"users",
+						"register",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"osman\",\n    \"email\" : \"ona5@cornell.edu\",\n    \"password\": \"password3\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://0.0.0.0:5000/api/users/login/",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"users",
+						"login",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "session",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "a4e037e79eecadb8168a7c75934d63190210c750",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://0.0.0.0:5000/api/users/session/",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"users",
+						"session",
+						""
 					]
 				}
 			},
