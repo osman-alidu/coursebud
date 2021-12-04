@@ -51,6 +51,7 @@ class ReviewPageActivity : AppCompatActivity() {
         var rating = intent.extras?.getString("rating")
         var code = intent.extras?.getString("code")
         id = intent.extras?.getString("id").toString()
+      //  var reviewList = intent.extras?.getStringArrayList("reviews")
 
 
         courseName.setText(name)
@@ -70,7 +71,13 @@ class ReviewPageActivity : AppCompatActivity() {
         populateReviewList()
 
         addReviewButton.setOnClickListener {
-            val intent = Intent(this, MakeReviewActivity::class.java)
+            val intent = Intent(this, MakeReviewActivity::class.java).apply {
+                putExtra("name", name)
+                putExtra("rating", rating)
+                putExtra("code", code)
+                putExtra("id", id)
+               // putStringArrayListExtra("reviews", reviewList)
+            }
             startActivity(intent)
         }
     }
