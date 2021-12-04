@@ -25,6 +25,8 @@ GitHub repo: https://github.com/osman-alidu/coursebud
 
 Link to Brief Introduction Video: 
 https://drive.google.com/file/d/1ey4PDgwiwUhZ0YCcrTCg6AzCboA5poBL/view?usp=sharing
+
+Main Screen Activities:
 <p float="left">
 
   <img src="https://user-images.githubusercontent.com/91798389/144699648-afcc50dd-6952-4826-8120-0133e1f26ad3.png" width=25% height=25%>
