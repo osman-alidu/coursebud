@@ -22,3 +22,6 @@ To run module, run the ff cmds in command line:
   - python3 app.py
 
 GitHub repo: https://github.com/osman-alidu/coursebud
+
+Link to Brief Introduction:
+https://drive.google.com/file/d/1ey4PDgwiwUhZ0YCcrTCg6AzCboA5poBL/view?usp=sharing
