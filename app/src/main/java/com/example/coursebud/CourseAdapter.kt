@@ -33,6 +33,23 @@ class CourseAdapter(private val courses: List<Course>) : RecyclerView.Adapter<Co
         holder.reviews.text = "reviews"
         holder.code.text = course.code
 
+        val context = holder.itemView.context
+        holder.itemView.setOnClickListener {
+            val courseIntent = Intent(context, ReviewPageActivity::class.java).apply {
+                putExtra("position", position)
+                putExtra("name", course.name)
+                putExtra("code", course.code)
+                putExtra("rating", course.rating.toString())
+                putExtra("id", course.id.toString())
+               // lateinit var reviewList : ArrayList<String>
+                //for (review in course.comments) {
+                  //  reviewList.add(review.comment)
+                //}
+                //putStringArrayListExtra("reviews", reviewList)
+            }
+            context.startActivity(courseIntent)
+        }
+
     }
 
     override fun getItemCount(): Int {

@@ -27,16 +27,16 @@ class CourseListActivity : AppCompatActivity() {
     private val client = OkHttpClient()
     private val moshi = Moshi.Builder().addLast(KotlinJsonAdapterFactory()).build()
     private val courseJsonAdapter = moshi.adapter(Course::class.java)
-    private val courseListType = Types.newParameterizedType(Course::class.java, Course::class.java)
-    private val courseListJsonAdapter : JsonAdapter<Course> = moshi.adapter(courseListType)
+    private val courseListType = Types.newParameterizedType(AllCourses::class.java, AllCourses::class.java)
+    private val courseListJsonAdapter : JsonAdapter<AllCourses> = moshi.adapter(courseListType)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_course_list)
 
-        searchBarBack = findViewById(R.id.searchBarBack)
-        searchBar = findViewById(R.id.searchBar)
+//        searchBarBack = findViewById(R.id.searchBarBack)
+//        searchBar = findViewById(R.id.searchBar)
         results = findViewById(R.id.results)
         list = findViewById(R.id.list)
 
@@ -54,8 +54,7 @@ class CourseListActivity : AppCompatActivity() {
 
     private fun populateCourseList() {
         lateinit var requestGet : Request
-        for (i in 1..5) {
-            requestGet = Request.Builder().url(BASE_URL + "/api/courses/"+i.toString()).build()
+            requestGet = Request.Builder().url(BASE_URL + "/api/courses").build()
             client.newCall(requestGet).enqueue(object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
                     e.printStackTrace()
@@ -68,8 +67,10 @@ class CourseListActivity : AppCompatActivity() {
                         if (!it.isSuccessful) {
                             throw IOException("Network call unsuccessful")
                         }
-                        val course = courseListJsonAdapter.fromJson(response.body!!.string())!!
-                        courses.add(course)
+                        val courseList = courseListJsonAdapter.fromJson(response.body!!.string())!!
+                        for (course in courseList.courses) {
+                            courses.add(course)
+                        }
                         adapter = CourseAdapter(courses)
                         runOnUiThread {
                             list.adapter = adapter
@@ -77,6 +78,5 @@ class CourseListActivity : AppCompatActivity() {
                     }
                 }
             })
-        }
     }
 }

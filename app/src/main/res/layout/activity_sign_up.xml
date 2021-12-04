@@ -14,7 +14,7 @@
         android:layout_marginStart="30dp"
         android:layout_marginTop="60dp"
         android:fontFamily="sans-serif"
-        android:text="Create Your Account"
+        android:text="Sign Up"
         android:textColor="@color/white"
         android:textSize="50dp"
         android:textStyle="bold"
@@ -27,8 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="5dp"
-        android:fontFamily="@font/amiko"
-        android:text="To access pro tips about all your classes please enter: "
+        android:text="Create an account to access pro tips about all your classes."
         android:textColor="@color/white"
         android:textSize="17dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,7 +39,7 @@
         android:layout_height="35dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="20dp"
-        android:text="Name:"
+        android:text="Name"
         android:textColor="@color/white"
         android:textSize="24dp"
         android:textStyle="bold"
@@ -51,23 +50,43 @@
         android:id="@+id/nameInput"
         android:layout_width="220dp"
         android:layout_height="35dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="56dp"
         android:autofillHints="username"
         android:background="@color/buttonOffWhite"
         android:maxLength="18"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
-        app:layout_constraintStart_toEndOf="@+id/nameText"
+
+        android:textColor="@color/buttonColorRed"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.157"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/annotation" />
+
+    <EditText
+        android:id="@+id/emailInput"
+        android:layout_width="220dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="36dp"
+        android:autofillHints="emailAddress"
+        android:background="@color/buttonOffWhite"
+        android:maxLength="18"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+
+        android:textColor="@color/buttonColorRed"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.157"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nameInput" />
 
     <TextView
         android:id="@+id/emailText"
         android:layout_width="118dp"
         android:layout_height="35dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
-        android:text="Email:"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="36dp"
+        android:text="Email"
         android:textColor="@color/white"
         android:textSize="24dp"
         android:textStyle="bold"
@@ -75,26 +94,29 @@
         app:layout_constraintTop_toBottomOf="@+id/nameText" />
 
     <EditText
-        android:id="@+id/emailInput"
+        android:id="@+id/pwInput"
         android:layout_width="220dp"
         android:layout_height="35dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
-        android:autofillHints="emailAddress"
+        android:layout_marginTop="44dp"
+        android:autofillHints="password"
         android:background="@color/buttonOffWhite"
         android:maxLength="18"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
-        app:layout_constraintStart_toEndOf="@+id/emailText"
-        app:layout_constraintTop_toBottomOf="@+id/nameInput" />
+        android:textColor="@color/buttonColorRed"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.157"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emailInput" />
 
     <TextView
         android:id="@+id/pwText"
         android:layout_width="118dp"
         android:layout_height="35dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
-        android:text="Password:"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="40dp"
+        android:text="Password"
         android:textColor="@color/white"
         android:textSize="24dp"
         android:textStyle="bold"
@@ -102,44 +124,33 @@
         app:layout_constraintTop_toBottomOf="@+id/emailText" />
 
     <EditText
-        android:id="@+id/pwInput"
+        android:id="@+id/gradInput"
         android:layout_width="220dp"
         android:layout_height="35dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
-        android:autofillHints="password"
+        android:layout_marginTop="32dp"
         android:background="@color/buttonOffWhite"
         android:maxLength="18"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
-        app:layout_constraintStart_toEndOf="@+id/pwText"
-        app:layout_constraintTop_toBottomOf="@+id/emailInput" />
+        android:textColor="@color/buttonColorRed"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.157"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pwInput" />
 
     <TextView
         android:id="@+id/gradText"
         android:layout_width="118dp"
         android:layout_height="35dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
-        android:text="Grad Year:"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="40dp"
+        android:text="Grad Year"
         android:textColor="@color/white"
         android:textSize="24dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pwText" />
-
-    <EditText
-        android:id="@+id/gradInput"
-        android:layout_width="220dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
-        android:background="@color/buttonOffWhite"
-        android:maxLength="18"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
-        app:layout_constraintStart_toEndOf="@+id/gradText"
-        app:layout_constraintTop_toBottomOf="@+id/pwInput" />
 
     <TextView
         android:id="@+id/nextArrow"
