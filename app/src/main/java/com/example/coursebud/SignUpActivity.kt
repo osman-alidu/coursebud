@@ -10,17 +10,17 @@ import okhttp3.Request
 import java.io.IOException
 
 class SignUpActivity : AppCompatActivity() {
-    private lateinit var title : TextView
+    private lateinit var title: TextView
     private lateinit var annotation: TextView
-    private lateinit var nameText : TextView
-    private lateinit var nameInput : EditText
-    private lateinit var emailText : TextView
-    private lateinit var emailInput : EditText
-    private lateinit var pwText : TextView
-    private lateinit var pwInput : EditText
-    private lateinit var gradText : TextView
-    private lateinit var gradInput : EditText
-    private lateinit var nextArrow : TextView
+    private lateinit var nameText: TextView
+    private lateinit var nameInput: EditText
+    private lateinit var emailText: TextView
+    private lateinit var emailInput: EditText
+    private lateinit var pwText: TextView
+    private lateinit var pwInput: EditText
+    private lateinit var gradText: TextView
+    private lateinit var gradInput: EditText
+    private lateinit var nextArrow: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,8 +38,7 @@ class SignUpActivity : AppCompatActivity() {
         nextArrow = findViewById(R.id.nextArrow)
 
 
-
-       // registerUser()
+        // registerUser()
 
         nextArrow.setOnClickListener {
             var intent = Intent(this, CourseListActivity::class.java)
@@ -47,26 +46,17 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
-//    private fun registerUser() {
-//        lateinit var requestPost : Request
-//        requestPost = Request.Builder().url(BASE_URL + "/api/users/register/)".build()
-//                client.newCall(requestPost).enqueue(object : Callback {
-//            override fun onFailure(call: Call, e: IOException) {
-//                e.printStackTrace()
-//                Log.d("debug", "failure" )
-//            }
-//
-//            override fun onResponse(call: Call, response: Response) {
-//                Log.d("debug", "On Response")
-//                response.use {
-//                    if (!it.isSuccessful) {
-//                        throw IOException("Network call unsuccessful")
-//                    }
-//                    val courseList = courseListJsonAdapter.fromJson(response.body!!.string())!!
-//                    for (course in courseList.courses) {
-//                        courses.add(course)
-//                    }
-//                }
-//            }
-//        })
+    private fun registerNewUser(newUser; User) {
+        val requestPost = Request.Builder().url(BASE_URL + "/api/users/register/")
+            .post(. toJson (newUser).toRequestBody(("application/json; charset=utf-8").toMediaType())).build()
+        client.newCall(requestPost).execute().use {
+            if (!it.isSuccessful) {
+                // handle unsuccessful response
+                Log.e("NETWORK_ERROR", it.message)
+                throw IOException("Post unsuccessful")
+            }
+            val responseString = it.body!!.string()
+            Log.d("NETWORK_RESPONSE", responseString)
+        }
+
 }
