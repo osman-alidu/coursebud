@@ -23,11 +23,13 @@ To run module, run the ff cmds in command line:
 
 GitHub repo: https://github.com/osman-alidu/coursebud
 
-Link to  Video Brief Introduction:
+Link to Brief Introduction Video: 
 https://drive.google.com/file/d/1ey4PDgwiwUhZ0YCcrTCg6AzCboA5poBL/view?usp=sharing
 
-![Screenshot_20211204-004636](https://user-images.githubusercontent.com/91798389/144699112-8ab1699d-01e5-4b92-aa0b-96139c7a3704.jpg){:height="50%" width="50%"}
-![Screenshot_20211204-004643](https://user-images.githubusercontent.com/91798389/144699116-da314a8e-b13f-4802-afa4-93725b48cf49.jpg){:height="50%" width="50%"}
-![Screenshot_20211204-004650](https://user-images.githubusercontent.com/91798389/144699119-171345ae-167e-470a-92e8-a97570368b17.jpg){:height="50%" width="50%"}
-![Screenshot_20211204-004656](https://user-images.githubusercontent.com/91798389/144699122-027feb3c-a6ea-4392-aae0-a811180a9982.jpg){:height="50%" width="50%"}
-![Screenshot_20211204-004700](https://user-images.githubusercontent.com/91798389/144699127-3822fe30-d67c-4273-81ae-b81a2a623be1.jpg){:height="50%" width="50%"}
+<img src="https://user-images.githubusercontent.com/91798389/144699648-afcc50dd-6952-4826-8120-0133e1f26ad3.png" width=25% height=25%>
+<img src="https://user-images.githubusercontent.com/91798389/144699465-d36f022a-022e-4dee-8396-9bbfe83b44f0.png" width=25% height=25%>
+<img src="https://user-images.githubusercontent.com/91798389/144699537-b93e5d99-2006-48e7-a502-c470318f07f0.png" width=25% height=25%>
+<img src="https://user-images.githubusercontent.com/91798389/144699536-fcfbc9a9-214b-4337-aada-7144fbe19e1f.png" width=25% height=25%>
+<img src="https://user-images.githubusercontent.com/91798389/144699535-7f853c70-19bf-4af2-ba46-a5e135daf084.png" width=25% height=25%>
+
+
