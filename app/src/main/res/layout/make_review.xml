@@ -12,7 +12,7 @@
         android:id="@+id/leaveReviewText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Leave a Review"
+        android:text="@string/leaveReview"
         android:textColor="@color/white"
         android:textSize="24dp"
         android:textStyle="bold"
@@ -26,8 +26,9 @@
         android:layout_width="310dp"
         android:layout_height="480dp"
         android:layout_marginTop="30dp"
-        android:background="@color/buttonOffWhite"
-        android:hint="What did you like or dislike about this course?"
+        android:background="@drawable/border"
+        android:backgroundTint="@color/buttonOffWhite"
+        android:hint="@string/reviewHint"
         android:maxLength="300"
         android:padding="10dp"
         android:textColor="@color/backgroundRed"
@@ -38,12 +39,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/leaveReviewText" />
 
-    <Button
+    <android.widget.Button
         android:id="@+id/submitReviewButton"
         android:layout_width="309dp"
         android:layout_height="48dp"
+        android:background="@drawable/button"
         android:backgroundTint="@color/buttonOffWhite"
-        android:text="Submit review"
+        android:text="@string/submitButtonText"
         android:textColor="@color/buttonColorRed"
         android:textStyle="bold"
         android:layout_marginTop="20dp"

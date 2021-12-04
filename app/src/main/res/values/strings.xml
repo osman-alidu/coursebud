@@ -1,3 +1,26 @@
 <resources>
     <string name="app_name">coursebud</string>
+    <string name="welcome">Welcome!</string>
+    <string name="intro">Find and write reviews about your courses at Cornell from fellow students.</string>
+    <string name="logInText">To get started, first:</string>
+    <string name="loginButton">login</string>
+    <string name="signUp">Or, if you’re new here,</string>
+    <string name="signUpButton">Sign Up</string>
+    <string name="signUpHeader">Sign Up</string>
+    <string name="signUpBody">Create an account to access pro tips about all your classes.</string>
+    <string name="username">Username</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="grad_year">Grad Year</string>
+    <string name="course_name">Intermediate Spanish</string>
+    <string name="reviewNum">10</string>
+    <string name="reviews">reviews</string>
+    <string name="courseCode">CS1110</string>
+    <string name="numRating">4.0</string>
+    <string name="leaveReview">Leave a Review</string>
+    <string name="reviewHint">What did you like or dislike about this course?</string>
+    <string name="submitButtonText">Submit review</string>
+    <string name="overall_rating">Overall Rating:</string>
+    <string name="addReviewButtonText">+ Add a review</string>
+    <string name="reviewsCap">Reviews</string>
 </resources>

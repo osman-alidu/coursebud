@@ -10,7 +10,7 @@
         android:id="@+id/courseName"
         android:layout_width="370dp"
         android:layout_height="wrap_content"
-        android:text="Intermediate Spanish"
+        android:text="@string/course_name"
         android:textColor="@color/black"
         android:textSize="30dp"
         android:textStyle="bold"
@@ -23,7 +23,7 @@
         android:id="@+id/courseCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SPAN2090"
+        android:text="@string/courseCode"
         android:textColor="@color/black"
         android:textSize="18dp"
         android:layout_marginStart="20dp"
@@ -39,7 +39,7 @@
         android:textColor="@color/black"
         android:layout_marginStart="20dp"
         android:layout_marginTop="30dp"
-        android:text="Overall Rating: "
+        android:text="@string/overall_rating"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/courseCode" />
@@ -48,7 +48,7 @@
         android:id="@+id/rating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="0"
+        android:text="@string/numRating"
         android:textSize="20dp"
         android:textColor="@color/black"
         android:layout_marginStart="5dp"
@@ -57,14 +57,15 @@
         app:layout_constraintTop_toBottomOf="@+id/courseCode"/>
 
 
-    <Button
+    <android.widget.Button
         android:id="@+id/addReviewButton"
         android:layout_width="309dp"
         android:layout_height="48dp"
         android:layout_marginTop="16dp"
+        android:background="@drawable/button"
         android:backgroundTint="@color/backgroundRed"
         android:fontFamily="sans-serif"
-        android:text="+ Add a review"
+        android:text="@string/addReviewButtonText"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -74,7 +75,7 @@
         android:id="@+id/reviewsText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Reviews"
+        android:text="@string/reviewsCap"
         android:textStyle="bold"
         android:textSize="20dp"
         android:textColor="@color/black"
