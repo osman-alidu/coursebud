@@ -29,7 +29,7 @@ https://drive.google.com/file/d/1ey4PDgwiwUhZ0YCcrTCg6AzCboA5poBL/view?usp=shari
 
   <img src="https://user-images.githubusercontent.com/91798389/144699648-afcc50dd-6952-4826-8120-0133e1f26ad3.png" width=25% height=25%>
   <img src="https://user-images.githubusercontent.com/91798389/144699465-d36f022a-022e-4dee-8396-9bbfe83b44f0.png" width=25% height=25%>
-  <img src="(https://user-images.githubusercontent.com/91798389/144699785-7861ed42-b8f3-48f6-a58c-e81835b688d0.jpg" width=25% height=25%> 
+  <img src="https://user-images.githubusercontent.com/91798389/144699812-17c7ac58-ddaf-4850-8a5f-fceac46a11c9.png" width=25% height=25%> 
   <img src="https://user-images.githubusercontent.com/91798389/144699537-b93e5d99-2006-48e7-a502-c470318f07f0.png" width=25% height=25%>
   <img src="https://user-images.githubusercontent.com/91798389/144699536-fcfbc9a9-214b-4337-aada-7144fbe19e1f.png" width=25% height=25%>
   <img src="https://user-images.githubusercontent.com/91798389/144699535-7f853c70-19bf-4af2-ba46-a5e135daf084.png" width=25% height=25%>
