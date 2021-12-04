@@ -46,17 +46,17 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
-    private fun registerNewUser(newUser; User) {
-        val requestPost = Request.Builder().url(BASE_URL + "/api/users/register/")
-            .post(. toJson (newUser).toRequestBody(("application/json; charset=utf-8").toMediaType())).build()
-        client.newCall(requestPost).execute().use {
-            if (!it.isSuccessful) {
-                // handle unsuccessful response
-                Log.e("NETWORK_ERROR", it.message)
-                throw IOException("Post unsuccessful")
-            }
-            val responseString = it.body!!.string()
-            Log.d("NETWORK_RESPONSE", responseString)
-        }
+//    private fun registerNewUser(newUser; User) {
+//        val requestPost = Request.Builder().url(BASE_URL + "/api/users/register/")
+//            .post(. toJson (newUser).toRequestBody(("application/json; charset=utf-8").toMediaType())).build()
+//        client.newCall(requestPost).execute().use {
+//            if (!it.isSuccessful) {
+//                // handle unsuccessful response
+//                Log.e("NETWORK_ERROR", it.message)
+//                throw IOException("Post unsuccessful")
+//            }
+//            val responseString = it.body!!.string()
+//            Log.d("NETWORK_RESPONSE", responseString)
+//        }
 
 }
