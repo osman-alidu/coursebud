@@ -247,8 +247,8 @@ def get_user_comments(nuser_id):
     return json.dumps({"comments": com_list}), 200
 
 
-@app.route("/api/users/<int:user_id>/<int:course_id>/comments/", methods=["POST"])
-def add_comment(user_id, course_id):
+@app.route("/api/users/<int:course_id>/comments/", methods=["POST"])
+def add_comment(course_id):
     body = json.loads(request.data)
     text = body.get('text')
     if text is None:
@@ -256,7 +256,7 @@ def add_comment(user_id, course_id):
     new_comment = Comment(
         text=body.get('text'),
         course_id=course_id,
-        user_id=user_id
+        # user_id=user_id
     )
     db.session.add(new_comment)
     db.session.commit()
