@@ -6,8 +6,12 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -18,7 +22,7 @@ import java.io.IOException
 class  MakeReviewActivity : AppCompatActivity() {
 
     private lateinit var submitReviewButton: Button
-    private lateinit var leaveReviewText: Text
+    private lateinit var leaveReviewText: TextView
     private lateinit var writeReviewBox: EditText
     private var id = ""
     private val moshi = Moshi.Builder().addLast(KotlinJsonAdapterFactory()).build()
@@ -42,8 +46,13 @@ class  MakeReviewActivity : AppCompatActivity() {
 
         submitReviewButton.setOnClickListener {
 
-            val newReview = Review(writeReviewBox.text.toString())
-            postReviewToCourse(newReview)
+
+            runBlocking {
+                withContext(Dispatchers.IO) {
+                    val newReview = Review(writeReviewBox.text.toString())
+                    postReviewToCourse(newReview)
+                }
+            }
 
             val intent = Intent(this, ReviewPageActivity::class.java)
             startActivity(intent)
