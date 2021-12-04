@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.EditText
 import android.widget.TextView
+import okhttp3.Request
 import java.io.IOException
 
 class SignUpActivity : AppCompatActivity() {
@@ -36,34 +37,36 @@ class SignUpActivity : AppCompatActivity() {
         gradInput = findViewById(R.id.gradInput)
         nextArrow = findViewById(R.id.nextArrow)
 
-        private fun registerUser() {
-            lateinit var requestPost : Post
-            requestPost = Request.Builder().url(BASE_URL + "/api/users/register/)".build()
-            client.newCall(requestPost).enqueue(object : Callback {
-                override fun onFailure(call: Call, e: IOException) {
-                    e.printStackTrace()
-                    Log.d("debug", "failure" )
-                }
 
-                override fun onResponse(call: Call, response: Response) {
-                    Log.d("debug", "On Response")
-                    response.use {
-                        if (!it.isSuccessful) {
-                            throw IOException("Network call unsuccessful")
-                        }
-                        val courseList = courseListJsonAdapter.fromJson(response.body!!.string())!!
-                        for (course in courseList.courses) {
-                            courses.add(course)
-                        }
-                        }
-                    }
-            })
 
-            registerUser()
+       // registerUser()
 
         nextArrow.setOnClickListener {
             var intent = Intent(this, CourseListActivity::class.java)
             startActivity(intent)
         }
     }
+
+//    private fun registerUser() {
+//        lateinit var requestPost : Request
+//        requestPost = Request.Builder().url(BASE_URL + "/api/users/register/)".build()
+//                client.newCall(requestPost).enqueue(object : Callback {
+//            override fun onFailure(call: Call, e: IOException) {
+//                e.printStackTrace()
+//                Log.d("debug", "failure" )
+//            }
+//
+//            override fun onResponse(call: Call, response: Response) {
+//                Log.d("debug", "On Response")
+//                response.use {
+//                    if (!it.isSuccessful) {
+//                        throw IOException("Network call unsuccessful")
+//                    }
+//                    val courseList = courseListJsonAdapter.fromJson(response.body!!.string())!!
+//                    for (course in courseList.courses) {
+//                        courses.add(course)
+//                    }
+//                }
+//            }
+//        })
 }
