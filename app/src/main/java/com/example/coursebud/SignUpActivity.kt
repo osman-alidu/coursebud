@@ -36,30 +36,21 @@ class SignUpActivity : AppCompatActivity() {
         gradInput = findViewById(R.id.gradInput)
         nextArrow = findViewById(R.id.nextArrow)
 
-        private fun registerUser() {
-            lateinit var requestPost : Post
-            requestPost = Request.Builder().url(BASE_URL + "/api/users/register/)".build()
-            client.newCall(requestPost).enqueue(object : Callback {
-                override fun onFailure(call: Call, e: IOException) {
-                    e.printStackTrace()
-                    Log.d("debug", "failure" )
+        private fun registerNewUser() {
+            val requestPost = Request.Builder().url(BASE_URL + "/api/users/register/")
+                .post(nameInput, emailInput, pwInput, gradInput).toRequestBody(("application/json; charset=utf-8").toMediaType())).build()
+            client.newCall(requestPost).execute().use {
+                if (!it.isSuccessful) {
+                    // handle unsuccessful response
+                    Log.e("NETWORK_ERROR", it.message)
+                    throw IOException("Post unsuccessful")
                 }
+                val responseString = it.body!!.string()
+                Log.d("NETWORK_RESPONSE", responseString)
+            }
+        }
 
-                override fun onResponse(call: Call, response: Response) {
-                    Log.d("debug", "On Response")
-                    response.use {
-                        if (!it.isSuccessful) {
-                            throw IOException("Network call unsuccessful")
-                        }
-                        val courseList = courseListJsonAdapter.fromJson(response.body!!.string())!!
-                        for (course in courseList.courses) {
-                            courses.add(course)
-                        }
-                        }
-                    }
-            })
-
-            registerUser()
+        registerNewUser()
 
         nextArrow.setOnClickListener {
             var intent = Intent(this, CourseListActivity::class.java)
