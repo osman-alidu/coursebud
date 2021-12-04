@@ -8,10 +8,11 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import okhttp3.Call
-import okhttp3.Callback
-import okhttp3.Request
-import okhttp3.Response
+import com.squareup.moshi.JsonAdapter
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.Types
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import okhttp3.*
 import java.io.IOException
 
 class ReviewPageActivity : AppCompatActivity() {
@@ -26,6 +27,13 @@ class ReviewPageActivity : AppCompatActivity() {
     private lateinit var courseCode : TextView
     private lateinit var overallRating : TextView
     private var reviews = mutableListOf<Review>() //create dataset
+
+    private val client = OkHttpClient()
+    private val moshi = Moshi.Builder().addLast(KotlinJsonAdapterFactory()).build()
+    private val reviewJsonAdapter = moshi.adapter(Review::class.java)
+    private var id = ""
+    private val reviewListType = Types.newParameterizedType(ReviewWrapper::class.java, ReviewWrapper::class.java)
+    private val reviewListJsonAdapter : JsonAdapter<ReviewWrapper> = moshi.adapter(reviewListType)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +50,8 @@ class ReviewPageActivity : AppCompatActivity() {
         var name = intent.extras?.getString("name")
         var rating = intent.extras?.getString("rating")
         var code = intent.extras?.getString("code")
-        val id = intent.extras?.getString("id")
+        id = intent.extras?.getString("id").toString()
+
 
         courseName.setText(name)
         courseCode.setText(code)
@@ -58,7 +67,7 @@ class ReviewPageActivity : AppCompatActivity() {
         adapter = ReviewAdapter(reviews)
         displayReviews.adapter = adapter
 
-//        populateReviewList()
+        populateReviewList()
 
         addReviewButton.setOnClickListener {
             val intent = Intent(this, MakeReviewActivity::class.java)
@@ -66,33 +75,32 @@ class ReviewPageActivity : AppCompatActivity() {
         }
     }
 
-//    private fun populateReviewList() {
-//        lateinit var requestGet: Request
-//        for (i in 1..5) {
-//            requestGet = Request.Builder().url(BASE_URL + "/api/courses/" + id + "/comments/" + i.toString()).build()
-//            client.newCall(requestGet).enqueue(object : Callback {
-//                override fun onFailure(call: Call, e: IOException) {
-//                    e.printStackTrace()
-//                    Log.d("debug", "failure")
-//                }
-//
-//                override fun onResponse(call: Call, response: Response) {
-//                    Log.d("debug", "On Response")
-//                    response.use {
-//                        if (!it.isSuccessful) {
-//                            throw IOException("Network call unsuccessful")
-//                        }
-//                        val remoteViews = adapter.fromJson(response.body!!.string())!!
-//                        reviews.add(reviews)
-//                        adapter = CourseAdapter(reviews)
-//                        runOnUiThread {
-//                            list.adapter = adapter
-//                        }
-//                    }
-//                }
-//            })
-//        }
-//
-//
-//    }
+    private fun populateReviewList() {
+        lateinit var requestGet: Request
+        requestGet = Request.Builder().url(BASE_URL + "/api/courses/" + id + "/comments").build()
+        client.newCall(requestGet).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                e.printStackTrace()
+                Log.d("debug", "failure")
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                Log.d("debug", "On Response")
+                response.use {
+                    if (!it.isSuccessful) {
+                        throw IOException("Network call unsuccessful")
+                    }
+                    val reviewList = reviewListJsonAdapter.fromJson(response.body!!.string())!!
+                    for (review in reviewList.comments) {
+                        reviews.add(review)
+                    }
+                    adapter = ReviewAdapter(reviews)
+                    runOnUiThread {
+                        displayReviews.adapter = adapter
+                    }
+                }
+            }
+        })
+
+    }
 }
