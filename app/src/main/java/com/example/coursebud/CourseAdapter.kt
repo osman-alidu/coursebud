@@ -41,6 +41,11 @@ class CourseAdapter(private val courses: List<Course>) : RecyclerView.Adapter<Co
                 putExtra("code", course.code)
                 putExtra("rating", course.rating.toString())
                 putExtra("id", course.id.toString())
+               // lateinit var reviewList : ArrayList<String>
+                //for (review in course.comments) {
+                  //  reviewList.add(review.comment)
+                //}
+                //putStringArrayListExtra("reviews", reviewList)
             }
             context.startActivity(courseIntent)
         }

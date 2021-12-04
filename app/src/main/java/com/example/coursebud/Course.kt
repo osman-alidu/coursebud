@@ -8,5 +8,5 @@ data class Course(
     val code:String,
     val name:String,
     val rating:Int,
-    val comments: List<String>
+    val comments: List<Review>
     )

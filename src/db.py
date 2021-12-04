@@ -67,20 +67,20 @@ class Comment(db.Model):
     text = db.Column(db.String, nullable=False)
     course_id = db.Column(db.Integer, db.ForeignKey(
         'course.id'), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey(
-        'user.id'), nullable=False)
+    # user_id = db.Column(db.Integer, db.ForeignKey(
+    #     'user.id'), nullable=False)
 
     def __init__(self, **kwargs):
         self.text = kwargs.get("text")
         self.course_id = kwargs.get("course_id")
-        self.user_id = kwargs.get("user_id")
+        # self.user_id = kwargs.get("user_id")
 
     def serialize(self):
         return {
             "id": self.id,
             "text": self.text,
-            "course": (Course.query.filter_by(id=self.course_id).first()).simple_serialize(),
-            "user": (User.query.filter_by(id=self.user_id).first()).simple_serialize()
+            "course": (Course.query.filter_by(id=self.course_id).first()).simple_serialize()
+            # "user": (User.query.filter_by(id=self.user_id).first()).simple_serialize()
         }
 
     def simple_serialize(self):
@@ -98,7 +98,7 @@ class User(db.Model):
     username = db.Column(db.String, nullable=False, unique=True)
     email = db.Column(db.String, nullable=False, unique=True)
     password_digest = db.Column(db.String, nullable=False)
-    comments = db.relationship("Comment", cascade="delete")
+    # comments = db.relationship("Comment", cascade="delete")
 
     # Session information
     session_token = db.Column(db.String, nullable=False, unique=True)
